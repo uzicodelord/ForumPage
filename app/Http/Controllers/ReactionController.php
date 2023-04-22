@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Reaction;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ class ReactionController extends Controller
         if ($reaction) {
             if ($reaction->type === $validatedData['type']) {
                 $reaction->delete();
+                $user->points -= 2;
             } else {
                 $reaction->type = $validatedData['type'];
                 $reaction->save();
@@ -30,10 +32,26 @@ class ReactionController extends Controller
             $reaction->user_id = $user->id;
 
             $post->reactions()->save($reaction);
+            $user->points += 2;
+
+            if ($post->user->id !== $user->id) {
+                $notification = new Notification;
+                $notification->message = $user->name . ' reacted to your post.';
+                $notification->user_id = $post->user->id;
+                $notification->post_id = $post->id;
+                $notification->save();
+                $post->user->increment('notifications_count');
+            }
         }
+
+        $user->updateRank();
+        $user->save();
 
         return back();
     }
+
+
+
 
     public function destroy(Post $post, Reaction $reaction)
     {

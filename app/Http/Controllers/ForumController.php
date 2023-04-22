@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class ForumController extends Controller
 {
@@ -18,8 +21,21 @@ class ForumController extends Controller
     {
         $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         $categories = Category::all();
-        return view('forum.index', ['posts' => $posts], ['categories' => $categories]);
+        $messages = Message::with('user')->orderBy('created_at', 'asc')->get();
+
+        foreach ($categories as $category) {
+            $category->name = ucwords(str_replace('-', ' ', $category->name));
+        }
+
+        $specialCategories = $categories->whereIn('name', ['General Discussion', 'Announcements', 'Applications Rank & Awards', 'Technical Support']);
+
+        $categories = $categories->whereNotIn('name', ['General Discussion', 'Announcements', 'Applications Rank & Awards', 'Technical Support']);
+
+        return view('forum.index', compact('posts', 'categories', 'specialCategories', 'messages'));
     }
+
+
+
 
 
     public function store(Request $request)

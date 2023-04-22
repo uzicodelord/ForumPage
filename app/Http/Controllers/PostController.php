@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -33,8 +35,13 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->content = $request->input('content');
         $post->user_id = auth()->user()->id;
+        $post->category_id = $request->category_id;
         $post->save();
-        return redirect()->route('posts.index');
+        $user = User::find(Auth::user()->id);
+        $user->points += 10;
+        $user->updateRank();
+        $user->save();
+        return redirect()->route('forum.index');
     }
 
 

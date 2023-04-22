@@ -2,7 +2,320 @@
 @import url('https://fonts.bunny.net/css?family=Nunito');
 
 // Variables
-@import 'variables';
+$primary-color: #1DA1F2;
+$secondary-color: #657786;
+$background-color: #14171A;
+$text-color: #FFFFFF;
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+.navbar-brand {
+    color: $primary-color;
+    font-weight: bold;
+}
+
+.navbar-brand:hover {
+    color: $text-color;
+}
+
+.nav-link {
+    color: $primary-color;
+    font-size: 14px;
+}
+
+.uzi {
+    width: 20px;
+    height: 20px;
+}
+
+.nav-link:hover {
+    color: $text-color;
+}
+
+.dropdown-item {
+    background-color: $background-color;
+    color: $primary-color;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: $background-color;
+    color: $text-color;
+}
+
+.dropdown-menu {
+    background-color: $background-color;
+    color: $primary-color;
+}
+
+.btn-secondaryy {
+    border: 2px solid $background-color;
+    color: $text-color;
+    background-color: $primary-color;
+    border-radius: 10%;
+}
+
+.btn-secondaryy:hover {
+    border: 2px solid $background-color;
+    color: $text-color;
+    background-color: $primary-color;
+}
+
+.sss {
+    color: $primary-color;
+}
+
+.card-header {
+    background-color: $background-color;
+    color: $primary-color;
+}
+
+.card {
+    border: 2px solid $primary-color;
+    background-color: $background-color;
+}
+
+.nav {
+    color: $primary-color;
+}
+
+.btn {
+    color: $text-color;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    color: $text-color;
+}
+
+.ok {
+    color: $primary-color;
+}
+
+.btn-primary {
+    color: $primary-color;
+    font-size: 14px;
+    background-color: $background-color;
+    border: 2px solid $primary-color;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: $primary-color;
+    color: $text-color;
+    border: 2px solid $primary-color;
+}
+
+.form-control {
+    background-color: $background-color;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    outline: 0;
+}
+
+.form-control:focus {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(29, 161, 242, 0.5);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(29, 161, 242, 0.5);
+    transition: 0.3s ease-in;
+}
+
+.form-check-input {
+    border: 2px solid $primary-color;
+
+}
+
+.form-check-input:focus {
+    background-color: $background-color;
+    border: 2px solid $primary-color;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(29, 161, 242, 0.5);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(29, 161, 242, 0.5);
+    transition: 0.3s ease-in;
+}
+
+.linklink:hover{
+    background-color: $primary-color;
+    color: #fff;
+}
+
+.form-check-input:checked {
+    background-color: $background-color;
+    border: 2px solid $primary-color;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(29, 161, 242, 0.5);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(29, 161, 242, 0.5);
+    transition: 0.3s ease-in;
+}
+
+.font-shadow {
+    text-shadow: 1px 1px 1px $primary-color;
+    font-size: 23px;
+}
+
+* {
+    color: #8899a6;
+    background-color: #15202b;
+}
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    color: $primary-color;
+}
+
+.card {
+    background-color: #15202b;
+    border-color: $primary-color;
+}
+
+.hhh {
+    width: 9%;
+}
+
+.ggg {
+    display: flex;
+}
+
+/* Navbar */
+
+.navbar-brand {
+    border-bottom: 1px solid $primary-color;
+    color: $primary-color;
+}
+
+.navbar-brand:hover {
+    color: #fff;
+    border-bottom: 1px solid $primary-color;
+    text-decoration: none;
+    transition: 0.5s ease-in;
+}
+
+.nav-link {
+    color: $primary-color;
+    font-size: 14px;
+}
+
+.uzi {
+    width: 20px;
+    height: 20px;
+}
+
+.nav-link:hover {
+    color: #fff;
+    border-bottom: 1px solid $primary-color;
+    text-decoration: none;
+    transition: 0.5s ease-in;
+}
+
+.dropdown-item {
+    background-color: #15202b;
+    color: $primary-color;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #15202b;
+    color: #fff;
+    border-bottom: 1px solid $primary-color;
+    transition: 0.5s ease-in-out;
+}
+
+.dropdown-menu {
+    background-color: #15202b;
+    color: $primary-color;
+}
+
+.btn-secondaryy {
+    border: 2px solid #15202b;
+    color: #fff;
+    background-color: $primary-color;
+    border-radius: 10%;
+}
+
+.btn-secondaryy:hover {
+    border: 2px solid #15202b;
+    color: #fff;
+    background-color: $primary-color;
+}
+
+.sss {
+    color: $primary-color;
+}
+
+.card-header {
+    background-color: #15202b;
+    color: $primary-color;
+}
+
+.nav {
+    color: $primary-color;
+}
+
+.btn {
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    color: #fff;
+    border-bottom: 1px solid $primary-color;
+    text-decoration: none;
+    transition: 0.5s ease-in;
+}
+
+.ok {
+    color: $primary-color;
+}
+
+.btn-primary {
+    color: $primary-color;
+    font-size: 14px;
+    background-color: #15202b;
+    border: 2px solid $primary-color;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: $primary-color;
+    color: #fff;
+    border: 2px solid $primary-color;
+}
+
+.form-control {
+    background-color: #15202b;
+    border: 1px solid #38444d;
+    color: #fff;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.form-control:focus {
+    border-color: #1da1f2;
+    box-shadow: none;
+}
+
+.btn {
+    color: #fff;
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background-color: #0c8ddb;
+    color: #fff;
+    transform: scale(1);
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+.sh:hover {
+    background-color: darkred;
+    color: #fff;
+    transform: scale(1);
+}

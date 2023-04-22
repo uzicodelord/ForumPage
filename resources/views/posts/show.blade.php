@@ -5,17 +5,20 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"
-                         style="background-color: #090909;color: darkred;">Posted by <b>{{ $post->user->name }}</b>
+                    <div class="card-header">
+                        <b style="color: #fff;">
+                            <a href="{{ route('profiles.show', $post->user->id) }}">{{ $post->user->name }}</a>
+                            <span class="font-shadow"> {{ $post->user->getRank() }}</span>
+                        </b>
                     </div>
                     <div class="card-body">
-                        <strong>
+                        <strong style="color: #fff">
                         {!! $post->title !!}
                         </strong>
                     </div>
                     <div class="card-body">
                         @if(Auth::id() !== $post->user_id && (!$post->reactions()->where('user_id', Auth::id())->exists() || !$post->replies()->where('user_id', Auth::id())->exists()))
-                            <h6 style="background-color: #090909;color: darkred;padding: 5px;width: 45%;">
+                            <h6 style="background-color: black;color: darkred;padding: 5px;width: 45%;">
                                 To see this hidden content, you must reply and react.
                             </h6>
                         @else
@@ -23,7 +26,7 @@
                         @endif
                     </div>
                 @if($post->reactions()->count() > 0)
-                        <div class="reactions" style="margin: 20px;">
+                        <div class="reactions">
                             @php
                                 $reactions = $post->reactions->groupBy('type')->map(function($reaction) {
                                     return $reaction->count();
@@ -41,28 +44,28 @@
                         </div>
                     @endif
                     <div class="card-footer">
-                        <form action="{{ route('reactions.store', $post) }}" method="POST">
+                        <p>React to this post:</p>
+                        <form action="{{ route('reactions.store', $post) }}" method="POST" class="d-flex">
                             @csrf
-                            <div class="form-group">
-                                <label for="type">React to this post:</label>
-                                <select class="form-control" name="type" id="type">
-                                    <option value="like">Like</option>
-                                    <option value="love">Love</option>
-                                    <option value="laugh">Laugh</option>
+                            <div class="form-group mr-3">
+                                <select class="form-control hhh" name="type" id="type" style="width:50%;margin-right: 50px;">
+                                    <option value="like">&#x1F44D;</option>
+                                    <option value="love">&#x2764;&#xFE0F;</option>
+                                    <option value="laugh">&#x1F602;</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">React</button>
+                            <button type="submit" class="btn btn-primary hhh" style="margin-left: -35px;">React</button>
+
                         </form>
                     </div>
-
-                        <div class="card-header"
-                             style="background-color: #090909;color: darkred;">
+                    <div class="card-header">
+                        <hr>
                             {{ $post->replies->count() }} Replies
                         </div>
                         <div class="card-body">
                             @foreach ($post->replies as $reply)
                                 <div class="mb-3">
-                                    <div class="font-weight-bold"><b>{{ $reply->user->name }}</b></div>
+                                    <div class="font-weight-bold"><b style="color: #fff">{{ $reply->user->name }} <span class="font-shadow">[{{ $reply->user->getRank() }}]</span></b></div>
                                     <div>{{ $reply->body }}</div>
                                 </div>
                             @endforeach
@@ -74,15 +77,15 @@
                                     <label for="replyBody">Leave a reply</label>
                                     <textarea name="body" id="replyBody" class="form-control" rows="5"></textarea>
                                 </div>
-
+                                <br>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
+
             @if($post->user_id == Auth::id())
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">Actions</div>
                     <div class="card-body">
@@ -90,7 +93,7 @@
                         <form action="{{ route('posts.destroy', $post) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-block mt-2">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-block mt-2 sh">Delete</button>
                         </form>
                     </div>
                 </div>
@@ -121,7 +124,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondaryy" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                 </form>
