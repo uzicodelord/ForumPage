@@ -126,6 +126,16 @@ class PostController extends Controller
         return redirect()->back();
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('q');
+        $posts = Post::where('title', 'like', "%$query%")
+            ->orWhere('content', 'like', "%$query%")
+            ->get();
+
+        return view('posts.search', compact('posts', 'query'));
+    }
+
 
 
 }

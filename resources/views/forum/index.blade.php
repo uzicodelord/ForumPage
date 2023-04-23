@@ -23,6 +23,14 @@
         </div>
         <br>
         <br>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search posts" id="search-input">
+            <div class="input-group-append">
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
+            </div>
+        </div>
+
+        <div id="search-results"></div>
         <div class="row">
             <div class="col-md-3">
             <div class="card">
@@ -184,4 +192,8 @@
             </div>
         </div>
     </div>
+    <script>
+
+    </script>
+
 @endsection

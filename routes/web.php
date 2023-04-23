@@ -30,7 +30,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
 
 Route::get('/categories/{category:name}', [CategoryController::class, 'index'])->name('categories.index');
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -62,3 +61,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
     Route::post('/chat', [App\Http\Controllers\ChatController::class, 'store'])->name('chat.store');
 });
+
+Route::get('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search.index');

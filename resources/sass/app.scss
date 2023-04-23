@@ -559,3 +559,22 @@ a:hover {
 .stars {
     color: yellow;
 }
+
+#search-results {
+    position: absolute;
+    background: #1b2838;
+    width: 10.2%;
+    z-index: 999;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #0c8ddb;
+}
+
+#search-results a {
+    color: #333;
+    text-decoration: none;
+}
+
+#search-results a:hover {
+    color: #666;
+}

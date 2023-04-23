@@ -39,6 +39,16 @@
 
                     <ul class="navbar-nav ms-auto">
                         @auth
+                            <div class="container">
+                                <form action="{{ route('search.index') }}" method="GET" id="search-form">
+                                    <div class="form-group">
+                                        <input type="text" name="q" class="form-control" id="search-input" placeholder="Search">
+                                    </div>
+                                </form>
+                                <div id="search-results">
+                                    <ul class="list-group"></ul>
+                                </div>
+                            </div>
                         @if(Auth::user()->role == 'admin')
                             <li class="nav-item">
                                 <a class="btn ok" href="{{ route('categories.create') }}">Add Categories (Admin Only)</a>
@@ -301,6 +311,38 @@
                 }
             });
         });
+
+        $(document).ready(function() {
+            $('#search-input').on('keyup', function() {
+                var query = $(this).val();
+                if (query !== '') {
+                    $.ajax({
+                        url: "{{ route('search.index') }}",
+                        type: "GET",
+                        data: { q: query },
+                        success: function(response) {
+                            var results = [];
+                            $(response).find('li').each(function() {
+                                var postLink = $(this).find('a');
+                                var post = {
+                                    id: postLink.attr('href').split('/').pop(),
+                                    title: postLink.text()
+                                };
+                                results.push(post);
+                            });
+                            var output = '';
+                            $.each(results, function(index, post) {
+                                output += '<li><a href="/posts/' + post.id + '">' + post.title + '</a></li>';
+                            });
+                            $('#search-results').html('<ul>' + output + '</ul>');
+                        }
+                    });
+                } else {
+                    $('#search-results ul').empty();
+                }
+            });
+        });
+
 
     </script>
 </body>
