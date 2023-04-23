@@ -86,6 +86,7 @@
                                                     </div>
                                             </div>
                                         @endforeach
+
                                     </div>
                                 @else
                                     <p>No categories found</p>
@@ -146,7 +147,7 @@
                             <div class="card-header">Recent Posts</div>
                             <div class="card-body">
                                 @if (count($posts) > 0)
-                                    @foreach ($posts->take(3) as $post)
+                                    @foreach ($posts->take(5) as $post)
                                         <div class="card mb-3">
                                             <div class="card-header">
                                                 <h3><a href="{{ route('posts.show',$post->id) }}">{{ $post->title }}</a></h3>

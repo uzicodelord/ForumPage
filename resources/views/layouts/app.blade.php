@@ -84,7 +84,9 @@
                                         </a>
                                     @endforeach
                                     <br>
+                                    @if (auth()->user()->notifications_count > 0)
                                     <a href="{{ route('notifications.index') }}" style="font-size: 13px;">Show All...</a>
+                                        @endif
                                 </div>
                             </div>
                         @endauth
