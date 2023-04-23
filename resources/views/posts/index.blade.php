@@ -15,6 +15,7 @@
                                     </div>
                                     <div class="card-body">
                                         <small>Written on {{ $post->created_at }} by {{ $post->user->name }}</small>
+                                        <span class="user-rank {{ $user->getRank() }}">[{{ $user->rank }}]</span>
                                     </div>
                                 </div>
 

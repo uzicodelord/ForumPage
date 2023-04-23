@@ -56,6 +56,28 @@ $text-color: #FFFFFF;
     border-radius: 10%;
 }
 
+.navbar {
+    height: 100px;
+}
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
+    grid-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.image-grid img {
+    width: 100%;
+    height: auto;
+}
+
+.navbar-brand {
+    font-size: 50px;
+    font-weight: bold;
+}
+
 .btn-secondaryy:hover {
     border: 2px solid $background-color;
     color: $text-color;
@@ -72,8 +94,10 @@ $text-color: #FFFFFF;
 }
 
 .card {
-    border: 2px solid $primary-color;
+    border: 4px solid $primary-color;
     background-color: $background-color;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,1),0 0 8px rgba(29, 161, 242, 1);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,1),0 0 8px rgba(29, 161, 242, 1);
 }
 
 .nav {
@@ -318,4 +342,216 @@ a:hover {
     background-color: darkred;
     color: #fff;
     transform: scale(1);
+}
+
+.rank-ultimate-overlord {
+    color: #F5F5F5;
+    text-shadow: 0 0 5px #FFA500, 0 0 10px #FFA500, 0 0 20px #FFA500;
+    animation: glowing-orange 1s ease-in-out infinite;
+}
+
+.rank-supreme-commander {
+    color: #F5F5F5;
+    text-shadow: 0 0 5px #8B008B, 0 0 10px #8B008B, 0 0 20px #8B008B;
+    animation: glowing-purple 1s ease-in-out infinite;
+}
+
+.rank-generalissimo {
+    color: #F5F5F5;
+    text-shadow: 0 0 5px #1E90FF, 0 0 10px #1E90FF, 0 0 20px #1E90FF;
+    animation: glowing-blue 1s ease-in-out infinite;
+}
+
+.rank-grandmaster {
+    color: #F5F5F5;
+    text-shadow: 0 0 5px #228B22, 0 0 10px #228B22, 0 0 20px #228B22;
+    animation: glowing-green 1s ease-in-out infinite;
+}
+
+.rank-master {
+    color: #F5F5F5;
+    text-shadow: 0 0 5px #6A5ACD, 0 0 10px #6A5ACD;
+    animation: glowing-blueviolet 1s ease-in-out infinite;
+}
+
+.rank-veteran {
+    color: #F5F5F5;
+    text-shadow: 0 0 5px #008B8B, 0 0 10px #008B8B;
+    animation: glowing-darkcyan 1s ease-in-out infinite;
+}
+
+.rank-pro {
+    color: #F5F5F5;
+    text-shadow: 0 0 5px #696969;
+    animation: glowing-dimgrey 1s ease-in-out infinite;
+}
+
+.rank-expert {
+    color: #F5F5F5;
+    text-shadow: 0 0 5px #DC143C;
+    animation: glowing-crimson 1s ease-in-out infinite;
+}
+
+.rank-novice {
+    color: #F5F5F5;
+    text-shadow: 0 0 5px #F5DEB3;
+    animation: glowing-wheat 1s ease-in-out infinite;
+}
+
+.rank-peasant {
+    color: inherit;
+}
+
+/* keyframe animations for the glowing effect */
+@keyframes glowing-orange {
+    0% {
+        text-shadow: 0 0 5px #FFA500, 0 0 10px #FFA500, 0 0 20px #FFA500;
+    }
+}
+
+@keyframes glowing-purple {
+    0% {
+        text-shadow: 0 0 5px #8B008B, 0 0 10px #8B008B, 0 0 20px #8B008B;
+    }
+}
+
+@keyframes glowing-blue {
+    0% {
+        text-shadow: 0 0 5px #1E90FF, 0 0 10px #1E90FF, 0 0 20px #1E90FF;
+    }
+}
+
+@keyframes glowing-green {
+    0% {
+        text-shadow: 0 0 5px #228B22, 0 0 10px #228B22, 0 0 20px #228B22;
+    }
+}
+
+@keyframes glowing-blueviolet {
+    0% {
+        text-shadow: 0 0 5px #6A5ACD, 0 0 10px #6A5ACD, 0 0 20px #6A5ACD;
+    }
+}
+
+@keyframes glowing-darkcyan {
+    0% {
+        text-shadow: 0 0 5px #008B8B, 0 0 10px #008B8B;
+    }
+}
+
+@keyframes glowing-dimgrey {
+    0% {
+        text-shadow: 0 0 5px #696969;
+    }
+}
+
+@keyframes glowing-crimson {
+    0% {
+        text-shadow: 0 0 5px #DC143C;
+    }
+}
+
+@keyframes glowing-wheat {
+    0% {
+        text-shadow: 0 0 5px #F5DEB3;
+    }
+}
+
+.user-stats {
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.user-stat {
+    margin-right: 20px;
+    font-size: 16px;
+    color: rgba(121, 29, 29, 0.5);
+    font-weight: bold;
+}
+
+.user-rank {
+    display: inline-block;
+    border-radius: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #333;
+}
+
+.Peasant {
+    color: #FFB347;
+    text-shadow: 0px 0px 20px #FFB347;
+}
+
+.Trainee {
+    color: #C23B22;
+    text-shadow: 0px 0px 20px #C23B22;
+}
+
+.Novice {
+    color: #00BFFF;
+    text-shadow: 0px 0px 20px #00BFFF;
+}
+
+.Apprentice {
+    color: #9370DB;
+    text-shadow: 0px 0px 20px #9370DB;
+}
+
+.Journeyman  {
+    color: #C0C0C0;
+    text-shadow: 0px 0px 20px #C0C0C0;
+}
+
+.Veteran {
+    color: #800000;
+    text-shadow: 0px 0px 20px #800000;
+}
+
+.Elite {
+    color: #DB7F8E;
+    text-shadow: 0px 0px 20px #DB7F8E;
+}
+
+.Master {
+    color: #FFD700;
+    text-shadow: 0px 0px 20px #FFD700;
+}
+
+.Grandmaster {
+    color: #FF69B4;
+    text-shadow: 0px 0px 20px #FF69B4;
+}
+
+.Legend {
+    color: #9400D3;
+    text-shadow: 0px 0px 20px #9400D3;
+}
+
+.Hero {
+    color: #0066cc;
+    text-shadow: 1px 1px #0066cc, 2px 2px #0066cc, 3px 3px #0066cc;
+}
+
+.Divine {
+    color: #0099cc;
+    text-shadow: 1px 1px #0099cc, 2px 2px #0099cc, 3px 3px #0099cc;
+}
+
+.Immortal {
+    color: #00cccc;
+    text-shadow: 1px 1px #00cccc, 2px 2px #00cccc, 3px 3px #00cccc;
+}
+
+.Overlord {
+    color: #00cc66;
+    text-shadow: 1px 1px #00cc66, 2px 2px #00cc66, 3px 3px #00cc66;
+}
+
+.Supreme {
+    color: #000000;
+    text-shadow: 0px 0px 20px #9400D3;
+}
+
+.rounded-circle {
+    margin-right: 10px;
 }

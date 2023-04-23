@@ -50,8 +50,14 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show', compact('post'));
+        if (!session()->has('viewed_post_' . $post->id)) {
+            $post->increment('views_count');
+            session()->put('viewed_post_' . $post->id, true);
+        }
+        $replies = $post->replies()->orderBy('created_at', 'asc')->paginate(10);
+        return view('posts.show', compact('post', 'replies'));
     }
+
 
 
     /**
@@ -100,6 +106,26 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
     }
+
+    public function vote(Post $post, Request $request)
+    {
+        $key = 'voted_posts.'.$post->id;
+
+        if ($request->session()->has($key)) {
+            return redirect()->back()->with('error', 'You have already voted on this post.');
+        }
+
+        if ($request->input('vote') === 'upvote') {
+            $post->increment('upvotes');
+        } else if ($request->input('vote') === 'downvote') {
+            $post->increment('downvotes');
+        }
+
+        $request->session()->put($key, true);
+
+        return redirect()->back();
+    }
+
 
 
 }

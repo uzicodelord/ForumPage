@@ -16,7 +16,7 @@ $(document).ready(function() {
                 $('#chat-message').val(''); // clear the input field after a successful chat message send
                 var messageHtml = `<div style="padding-bottom: 5px;">
                 <a href="/profiles/${response.user.id}">
-                ${response.user.name}<span class="font-shadow" style="font-size: 16px;"> ${response.user.rank}:</span>
+              ${response.user.name}<span class="user-rank ${response.user.rank}">&nbsp[${response.user.rank}]:</span>
                 </a>
                 ${response.message}
                 </div>`;

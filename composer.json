@@ -8,6 +8,8 @@
         "php": "^8.1",
         "blade-ui-kit/blade-heroicons": "^2.1",
         "brunocfalcao/blade-feather-icons": "^3.0",
+        "codeat3/blade-typicons": "^1.5",
+        "davidhsianturi/blade-bootstrap-icons": "^1.4",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.8",
         "laravel/sanctum": "^3.2",

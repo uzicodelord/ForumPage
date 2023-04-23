@@ -43,7 +43,7 @@ class ReactionController extends Controller
                 $post->user->increment('notifications_count');
             }
         }
-
+        
         $user->updateRank();
         $user->save();
 

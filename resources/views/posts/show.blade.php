@@ -7,8 +7,9 @@
                 <div class="card">
                     <div class="card-header">
                         <b style="color: #fff;">
+                            <img src="{{ asset('storage/' . $post->user->profile_picture) }}" alt="{{ $post->user->name }}'s Profile Picture" class="rounded-circle mr-2" width="50" height="50">
                             <a href="{{ route('profiles.show', $post->user->id) }}">{{ $post->user->name }}</a>
-                            <span class="font-shadow"> {{ $post->user->getRank() }}</span>
+                            <span class="user-rank {{ $post->user->getRank() }}">[{{ $post->user->rank }}]</span>
                         </b>
                     </div>
                     <div class="card-body">
@@ -26,7 +27,7 @@
                         @endif
                     </div>
                 @if($post->reactions()->count() > 0)
-                        <div class="reactions">
+                        <div class="reactions" style="margin: 10px;">
                             @php
                                 $reactions = $post->reactions->groupBy('type')->map(function($reaction) {
                                     return $reaction->count();
@@ -43,6 +44,7 @@
                             @endif
                         </div>
                     @endif
+
                     <div class="card-footer">
                         <p>React to this post:</p>
                         <form action="{{ route('reactions.store', $post) }}" method="POST" class="d-flex">
@@ -58,6 +60,30 @@
 
                         </form>
                     </div>
+                    <div class="card-body">
+                        <div class="votes">
+                            <form action="{{ route('posts.vote', $post) }}" method="POST">
+                                @csrf
+                                <button type="submit" name="vote" value="upvote" class="btn btn-primary">Upvote</button>
+                                <span style="padding: 5px;">{{ $post->upvotes }}</span>
+                                <button type="submit" name="vote" value="downvote" class="btn btn-danger sh">Downvote</button>
+                                <span style="padding: 5px;">{{ $post->downvotes }}</span>
+                            </form>
+                        </div>
+                        <div class="text-muted" style="padding-top: 10px;">
+                            {{ $post->upvotes - $post->downvotes }} votes
+                        </div>
+                        <div class="text-center" style="font-size: 14px;">
+                            <span>Rating: {{ $post->averageRating }} / 5</span>
+                            <br>
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $post->averageRating)
+                                    <x-bi-star-fill class="text-warning" />
+                                @else
+                                    <x-bi-star class="text-warning" />
+                                @endif
+                            @endfor
+                        </div>
                     <div class="card-header">
                         <hr>
                             {{ $post->replies->count() }} Replies
@@ -66,7 +92,9 @@
                             @foreach ($post->replies as $reply)
                                 <div class="mb-3">
                                     <div class="font-weight-bold"><b style="color: #fff">{{ $reply->user->name }} <span class="font-shadow">[{{ $reply->user->getRank() }}]</span></b></div>
-                                    <div>{{ $reply->body }}</div>
+                                    <div>{{ $reply->body }}
+                                        <span class="text-muted" style="float:right;">{{ $reply->created_at->diffForHumans() }}</span>
+                                    </div>
                                 </div>
                             @endforeach
 
@@ -80,6 +108,9 @@
                                 <br>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
+                                <div class="pagination-wrapper" style="background-color: #090909; color: darkred; text-align: center;">
+                                    {{ $replies->links('vendor.pagination') }}
+                                </div>
                         </div>
                     </div>
                 </div>

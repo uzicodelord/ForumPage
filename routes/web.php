@@ -47,8 +47,11 @@ Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.upd
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 Route::post('/posts/{post}/replies', [ReplyController::class, 'store'])->name('replies.store');
 Route::post('/posts/{post}/reactions', [App\Http\Controllers\ReactionController::class, 'store'])->name('reactions.store');
+Route::post('/posts/{post}/vote', [PostController::class, 'vote'])->name('posts.vote');
 
 Route::get('/profiles/{id}', [ProfileController::class, 'show'])->name('profiles.show');
+Route::get('/profiles/{id}/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
+Route::put('/profiles', [ProfileController::class, 'update'])->name('profiles.update');
 Route::put('/profile/{user}/update-rank', [ProfileController::class, 'updateRank'])->middleware('admin')->name('profile.updateRank');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index')->middleware('auth');
 

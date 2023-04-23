@@ -24,7 +24,8 @@ class User extends Authenticatable
         'password',
         'role',
         'rank',
-        'points'
+        'points',
+        'profile_picture'
     ];
 
     /**
@@ -65,24 +66,34 @@ class User extends Authenticatable
     {
         $points = $this->points;
 
-        if ($points >= 500) {
-            return 'Ultimate Overlord';
+        if ($points >= 1000) {
+            return 'Supreme';
+        } elseif ($points >= 900) {
+            return 'Overlord';
+        } elseif ($points >= 800) {
+            return 'Immortal';
+        } elseif ($points >= 700) {
+            return 'Divine';
+        } elseif ($points >= 600) {
+            return 'Hero';
+        } elseif ($points >= 500) {
+            return 'Legend';
         } elseif ($points >= 400) {
-            return 'Supreme Commander';
-        } elseif ($points >= 300) {
-            return 'Generalissimo';
-        } elseif ($points >= 250) {
             return 'Grandmaster';
-        } elseif ($points >= 200) {
+        } elseif ($points >= 300) {
             return 'Master';
-        } elseif ($points >= 150) {
+        } elseif ($points >= 250) {
+            return 'Elite';
+        } elseif ($points >= 200) {
             return 'Veteran';
+        } elseif ($points >= 150) {
+            return 'Journeyman';
         } elseif ($points >= 100) {
-            return 'Pro';
+            return 'Apprentice';
         } elseif ($points >= 50) {
-            return 'Expert';
-        } elseif ($points >= 20) {
             return 'Novice';
+        } elseif ($points >= 20) {
+            return 'Trainee';
         } else {
             return 'Peasant';
         }

@@ -7,13 +7,22 @@
         var userId = {{ Auth::id() }};
     </script>
 
-    <div class="container">
+    <div style="margin: 20px;">
         <div style="text-align: center;">
             <img src="{{ asset('images/banner.gif') }}" alt="Image" style="width: 30%; margin: 0 auto;">
             <img src="{{ asset('images/banner1.gif') }}" alt="Image" style="width: 40%; margin: 0 auto;">
             <img src="{{ asset('images/banner.gif') }}" alt="Image" style="width: 30%; margin: 0 auto;">
         </div>
-
+        <div class="image-grid">
+            <img src="{{ asset('images/banner-900x120.gif') }}" alt="Image">
+            <img src="{{ asset('images/PmxLTLb.gif') }}" alt="Image">
+            <img src="{{ asset('images/tirUVXb.gif') }}" alt="Image">
+            <img src="{{ asset('images/dcshop-900x120.gif') }}" alt="Image">
+            <img src="{{ asset('images/qTRXZC4.gif') }}" alt="Image">
+            <img src="{{ asset('images/3HgVqHL.gif') }}" alt="Image">
+        </div>
+        <br>
+        <br>
         <div class="row">
             <div class="col-md-3">
             <div class="card">
@@ -23,7 +32,9 @@
                     <div id="messages" style="padding-bottom: 5px;">
                         @foreach ($messages as $message)
                             <div style="padding-bottom: 5px;">
-                                <a href="{{ route('profiles.show', $message->user->id) }}">{{ $message->user->name }}<span class="font-shadow" style="font-size: 16px;"> {{ $message->user->rank }}:</span></a>
+                                <a href="{{ route('profiles.show', $message->user->id) }}">{{ $message->user->name }}
+                                    <span class="user-rank {{ $message->user->getRank() }}">[{{ $message->user->rank }}]:</span>
+                                </a>
                                 {{ $message->message }}
                             </div>
                         @endforeach
@@ -141,7 +152,9 @@
                                                 <h3><a href="{{ route('posts.show',$post->id) }}">{{ $post->title }}</a></h3>
                                             </div>
                                             <div class="card-body">
-                                                <small>Posted on {{ $post->created_at }} by <a href="{{ route('profiles.show', $post->user->id) }}">{{ $post->user->name }}</a> <span class="font-shadow spancolor" style="font-size: 15px;">[{{ $post->user->rank }}]</span></small>
+                                                <small>Posted on {{ $post->created_at }} by <a href="{{ route('profiles.show', $post->user->id) }}">{{ $post->user->name }}</a>
+                                                    <span class="user-rank {{ $post->user->getRank() }}">[{{ $post->user->rank }}]</span>
+                                                </small>
                                             </div>
                                         </div>
                                     @endforeach
@@ -149,6 +162,25 @@
                             </div>
                         </div>
                     </div>
+            <div class="col-md-6">
+                <br>
+                <div class="card">
+                    <div class="card-header">About Us</div>
+                    <div class="card-body">
+                        <p> <span style="color: red;">UziForum</span> is a forum dedicated to making money on the Internet, various earning schemes, IT issues and much more. This is a forum about making money on the Internet, Also we share knowledge about earning fast,malware modification, hacking, security, programming, cracking, among many other things. Also of tools related to the above. If you have interest and desire to learn do not hesitate to register and start being part of our community, if you are new we will help you in everything we can.
+                        </p>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-6">
+                <br>
+                <div class="card">
+                    <div class="card-header">A Responsibility</div>
+                    <div class="card-body">
+                        <p style="font-size: 21px;"> <span style="color: red;">Administration</span> does not bear any responsibility for publications on this forum. If you think that topics and messages may contain information prohibited for distribution, please immediately inform the Administration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

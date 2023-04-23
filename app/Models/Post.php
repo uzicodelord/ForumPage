@@ -35,4 +35,14 @@ class Post extends Model
         return $this->hasMany(Reaction::class);
     }
 
+    public function getAverageRatingAttribute()
+    {
+        $totalVotes = $this->upvotes + $this->downvotes;
+        if ($totalVotes == 0) {
+            return 0;
+        }
+        $ratio = $this->upvotes / $totalVotes;
+        return round($ratio * 5);
+    }
+
 }

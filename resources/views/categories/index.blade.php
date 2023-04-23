@@ -1,17 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header font-shadow" style="font-size: 25px;">{{ $category->name }}</div>
                     <div class="card-body">
                         @if (count($posts) > 0)
                             @foreach ($posts as $post)
                                 <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h3><a href="{{ route('posts.show',$post->id) }}">{{ $post->title }}</a></h3>
+                                    <div class="card-header d-flex justify-content-between">
+                                        <h3 class="mb-0"><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h3>
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge badge-pill badge-secondary mr-2">{{ $post->replies->count() }} replies</span>
+                                            <span class="badge badge-pill badge-secondary">{{ $post->views_count }} views</span>
+                                        </div>
                                     </div>
                                     <div class="card-body">
                                         <small>Posted on {{ $post->created_at }} by <a href="{{ route('profiles.show', $post->user->id) }}">{{ $post->user->name }}</a> <span class="font-shadow spancolor" style="font-size: 15px;">[{{ $post->user->rank }}]</span></small>
@@ -27,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="card">
                     <div class="card-header">Actions</div>
                     <div class="card-body">

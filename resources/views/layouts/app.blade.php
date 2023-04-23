@@ -72,7 +72,7 @@
                                     </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <h6 class="dropdown-header">Notifications</h6>
-                                    @foreach (auth()->user()->notifications as $notification)
+                                    @foreach (auth()->user()->notifications->take(3) as $notification)
                                         <hr>
                                         <a class="dropdown-item {{ $notification->read ? 'text-muted' : '' }}" href="/posts/{{ $notification->post_id }}">
                                             {!! $notification->message !!}
@@ -83,6 +83,8 @@
                                             <a href="/delete-notification/{{ $notification->id }}" class="text-muted float-right mr-2" ><x-feathericon-trash-2 style="float:right;width: 15px;height: 15px;" /></a>
                                         </a>
                                     @endforeach
+                                    <br>
+                                    <a href="{{ route('notifications.index') }}" style="font-size: 13px;">Show All...</a>
                                 </div>
                             </div>
                         @endauth
@@ -250,12 +252,14 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profiles.show', Auth::user()->id) }}">
+                                        {{ __('Profile') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
