@@ -23,14 +23,21 @@
         </div>
         <br>
         <br>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search posts" id="search-input">
-            <div class="input-group-append">
-                <span class="input-group-text"><i class="fa fa-search"></i></span>
-            </div>
+        <div>
+            @if($upvotedpost)
+                <h2>Most Up Voted Post</h2>
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3><a href="{{ route('posts.show',$upvotedpost->id) }}">{{ $upvotedpost->title }}</a></h3>
+                    </div>
+                    <div class="card-body">
+                        <small>Posted on {{ $upvotedpost->created_at }} by <a href="{{ route('profiles.show', $upvotedpost->user->id) }}">{{ $upvotedpost->user->name }}</a>
+                            <span class="user-rank {{ $upvotedpost->user->getRank() }}">&nbsp[{{ $upvotedpost->user->rank }}]</span>
+                        </small>
+                    </div>
+                </div>
+            @endif
         </div>
-
-        <div id="search-results"></div>
         <div class="row">
             <div class="col-md-3">
             <div class="card">
@@ -150,7 +157,6 @@
                             </div>
                         </div>
                         <br>
-                        <br>
                         <div class="card">
                             <div class="card-header">Recent Posts</div>
                             <div class="card-body">
@@ -162,7 +168,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <small>Posted on {{ $post->created_at }} by <a href="{{ route('profiles.show', $post->user->id) }}">{{ $post->user->name }}</a>
-                                                    <span class="user-rank {{ $post->user->getRank() }}">[{{ $post->user->rank }}]</span>
+                                                    <span class="user-rank {{ $post->user->getRank() }}">&nbsp[{{ $post->user->rank }}]</span>
                                                 </small>
                                             </div>
                                         </div>

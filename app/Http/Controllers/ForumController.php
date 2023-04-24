@@ -22,7 +22,7 @@ class ForumController extends Controller
         $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         $categories = Category::all();
         $messages = Message::with('user')->orderBy('created_at', 'asc')->get();
-
+        $upvotedpost = Post::orderBy('upvotes', 'desc')->first();
         foreach ($categories as $category) {
             $category->name = ucwords(str_replace('-', ' ', $category->name));
         }
@@ -31,7 +31,7 @@ class ForumController extends Controller
 
         $categories = $categories->whereNotIn('name', ['General Discussion', 'Announcements', 'Applications Rank & Awards', 'Technical Support']);
 
-        return view('forum.index', compact('posts', 'categories', 'specialCategories', 'messages'));
+        return view('forum.index', compact('posts', 'categories', 'specialCategories', 'messages', 'upvotedpost'));
     }
 
 

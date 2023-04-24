@@ -28,6 +28,17 @@
                                     <p class="user-stat">Reaction score: {{ $user->reactions->count() }}</p>
                                 </div>
                             </div>
+                            <div class="user-awards">
+                                <h4>Awards:</h4>
+                                    @foreach ($user->getAwards() as $award)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span class="user-rank Legend badge badge-{{ $award->color ?? 'primary' }}">{{ $award->name }}</span>
+                                            <span class="badge">{{ $award->description }}</span>
+                                        </li>
+                                    <hr>
+                                    @endforeach
+                            </div>
+
                             <h2>Posts</h2>
                         @if ($posts->count())
                             @foreach ($posts as $post)
@@ -43,24 +54,6 @@
                             @endforeach
                         @else
                             <p>No posts yet.</p>
-                        @endif
-
-                        @if(Auth::user()->role == 'admin')
-                            <form method="POST" action="{{ route('profile.updateRank', $user->id) }}">
-                                @csrf
-                                @method('PUT')
-                                <div>
-                                    <br>
-                                    <label for="rank">Rank:</label>
-                                    <select name="rank">
-                                        @foreach(['Peasant', 'Novice', 'Expert', 'Pro', 'Veteran', 'Master', 'Grandmaster', 'Generalissimo', 'Supreme Commander', 'Ultimate Overlord'] as $rank)
-                                            <option value="{{ $rank }}" @if($user->rank == $rank) selected @endif>{{ $rank }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <br>
-                                <button type="submit" class="btn btn-primary">Update Rank</button>
-                            </form>
                         @endif
                     </div>
             </div>

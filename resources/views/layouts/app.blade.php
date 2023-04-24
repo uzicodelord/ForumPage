@@ -39,7 +39,7 @@
 
                     <ul class="navbar-nav ms-auto">
                         @auth
-                            <div class="container">
+                            <div>
                                 <form action="{{ route('search.index') }}" method="GET" id="search-form">
                                     <div class="form-group">
                                         <input type="text" name="q" class="form-control" id="search-input" placeholder="Search">
@@ -51,7 +51,7 @@
                             </div>
                         @if(Auth::user()->role == 'admin')
                             <li class="nav-item">
-                                <a class="btn ok" href="{{ route('categories.create') }}">Add Categories (Admin Only)</a>
+                                <a class="btn ok" href="{{ route('categories.create') }}">Add Categories</a>
                             </li>
                         @endif
                             <li class="nav-item">
@@ -96,7 +96,9 @@
                                     <br>
                                     @if (auth()->user()->notifications_count > 0)
                                     <a href="{{ route('notifications.index') }}" style="font-size: 13px;">Show All...</a>
-                                        @endif
+                                    @else
+                                        <h6 class="dropdown-header">No Notifications</h6>
+                                    @endif
                                 </div>
                             </div>
                         @endauth
@@ -332,7 +334,9 @@
                             });
                             var output = '';
                             $.each(results, function(index, post) {
-                                output += '<li><a href="/posts/' + post.id + '">' + post.title + '</a></li>';
+                                output += '<li style="list-style-type: none;font-size: 18px;text-align: left;">' +
+                                    '<a style="color: #fff;" href="/posts/' + post.id + '">' + post.title + '</a></li>'
+                                ;
                             });
                             $('#search-results').html('<ul>' + output + '</ul>');
                         }
