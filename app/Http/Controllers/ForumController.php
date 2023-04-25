@@ -23,16 +23,25 @@ class ForumController extends Controller
         $categories = Category::all();
         $messages = Message::with('user')->orderBy('created_at', 'asc')->get();
         $upvotedpost = Post::orderBy('upvotes', 'desc')->first();
+
+        $categoryIcons = [
+            'General Discussion' => 'fa fa-comments',
+            'Announcements' => 'fa fa-bullhorn',
+            'Applications Rank & Awards' => 'fa fa-trophy',
+            'Technical Support' => 'fa fa-wrench',
+        ];
+
         foreach ($categories as $category) {
             $category->name = ucwords(str_replace('-', ' ', $category->name));
         }
 
-        $specialCategories = $categories->whereIn('name', ['General Discussion', 'Announcements', 'Applications Rank & Awards', 'Technical Support']);
+        $specialCategories = $categories->whereIn('name', array_keys($categoryIcons));
+        $categories = $categories->whereNotIn('name', array_keys($categoryIcons));
 
-        $categories = $categories->whereNotIn('name', ['General Discussion', 'Announcements', 'Applications Rank & Awards', 'Technical Support']);
-
-        return view('forum.index', compact('posts', 'categories', 'specialCategories', 'messages', 'upvotedpost'));
+        return view('forum.index', compact('posts', 'categories', 'specialCategories', 'messages', 'upvotedpost', 'categoryIcons'));
     }
+
+
 
 
 

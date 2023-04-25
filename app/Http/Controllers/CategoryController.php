@@ -18,7 +18,8 @@ class CategoryController extends Controller
     {
         $posts = $category->posts()->orderBy('created_at', 'desc')->paginate(10);
         $category->name = ucwords(str_replace('-', ' ', $category->name));
-        return view('categories.index',compact('posts','category') );
+        $categories = Category::all();
+        return view('categories.index',compact('posts','category', 'categories') );
     }
 
 }

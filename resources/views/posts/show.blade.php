@@ -56,8 +56,11 @@
                                     <option value="laugh">&#x1F602;</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary hhh" style="margin-left: -35px;">React</button>
-
+                            @if($post->reactions()->where('user_id', auth()->id())->exists())
+                                <button type="submit" class="btn btn-primary hhh" style="margin-left: -30px;width: 11%;">Unreact</button>
+                            @else
+                                <button type="submit" class="btn btn-primary hhh" style="margin-left: -35px;">React</button>
+                            @endif
                         </form>
                     </div>
                     <div class="card-body">
@@ -70,11 +73,11 @@
                                 <span style="padding: 5px;">{{ $post->downvotes }}</span>
                             </form>
                         </div>
-                        <div class="text-muted" style="padding-top: 10px;">
+                        <div class="text-center" style="padding-top: 10px;">
                             {{ $post->upvotes - $post->downvotes }} votes
                         </div>
                         <div class="text-center" style="font-size: 14px;">
-                            <span>Rating: {{ $post->averageRating }} / 5</span>
+                            <span>Rating: {{ $post->averageRating }} </span>
                             <br>
                             @for ($i = 1; $i <= 5; $i++)
                                 @if ($i <= $post->averageRating)
@@ -91,7 +94,7 @@
                         <div class="card-body">
                             @foreach ($post->replies as $reply)
                                 <div class="mb-3">
-                                    <div class="font-weight-bold"><b style="color: #fff">{{ $reply->user->name }} <span class="font-shadow">[{{ $reply->user->getRank() }}]</span></b></div>
+                                    <div class="font-weight-bold"><b style="color: #fff">{{ $reply->user->name }} <span class="user-rank {{ $reply->user->getRank() }}">[{{ $reply->user->getRank() }}]</span></b></div>
                                     <div>{{ $reply->body }}
                                         <span class="text-muted" style="float:right;">{{ $reply->created_at->diffForHumans() }}</span>
                                     </div>

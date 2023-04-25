@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.4.0",
-        "@mdi/font": "^7.2.96"
+        "@mdi/font": "^7.2.96",
+        "font-awesome": "^4.7.0"
     }
 }

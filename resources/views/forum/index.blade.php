@@ -25,7 +25,7 @@
         <br>
         <div>
             @if($upvotedpost)
-                <h2>Most Up Voted Post</h2>
+                <h2>Top Voted Post</h2>
                 <div class="card mb-3">
                     <div class="card-header">
                         <h3><a href="{{ route('posts.show',$upvotedpost->id) }}">{{ $upvotedpost->title }}</a></h3>
@@ -59,30 +59,29 @@
                         <input type="text" class="btn btn-primary" id="chat-message" name="message" placeholder="Chat..." style="flex: 1;width: 50%;cursor: text;text-align: left;">
                         <button class="btn btn-primary" type="submit" style="margin-left: 5px;">Send</button>
                     </form>
-                </div>
-            </div>
-            </div>
-                    <div class="col-md-5">
-                        <!-- Show the special categories in a separate card -->
-                        <div class="card">
-                            <div class="card-header"><h4>Home</h4></div>
-                            <div class="card-body">
-                                @if (count($categories) > 0)
-                                    <div class="row">
-                                        @foreach ($specialCategories as $category)
-                                            <div class="mb-3">
-                                                <div class="card-header">
-                                                    <h3>
-                                                        {{ $category->posts->count() }}
-                                                        <a href="{{ route('categories.index', str_replace(' ', '-', strtolower($category->name))) }}">{{ $category->name }}</a>
-                                                    </h3>
+                     </div>
+                    </div>
+                    </div>
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="card-header">Home</div>
+                                <div class="card-body">
+                                    @if (count($categories) > 0)
+                                        <div class="row">
+                                            @foreach ($specialCategories as $category)
+                                                <div class="mb-3">
+                                                    <div class="card-header d-flex align-items-center">
+                                                        <i class="fa {{ $categoryIcons[$category->name] }} fa-fw mr-2 text-primary"></i>
+                                                        <h3 class="font-shadow Novice" style="padding-left: 10px;">
+                                                            <a href="{{ route('categories.index', str_replace(' ', '-', strtolower($category->name))) }}">{{ $category->name }}</a>
+                                                        </h3>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <p>No categories found</p>
-                                @endif
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <p>No categories found</p>
+                                    @endif
                             </div>
                         </div>
                         <br>
@@ -94,7 +93,7 @@
                                         @foreach ($categories as $category)
                                                 <div class="mb-3">
                                                     <div class="card-header">
-                                                        <h3>
+                                                        <h3 class="Novice font-shadow">
                                                             {{ $category->posts->count() }}
                                                             <a href="{{ route('categories.index', str_replace(' ', '-', strtolower($category->name))) }}">{{ $category->name }}</a>
                                                         </h3>
