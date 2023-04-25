@@ -53,7 +53,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'profile_picture' => ['nullable', 'image', 'max:2048'],
         ]);
     }
 
@@ -61,22 +60,14 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
-        $profilePicturePath = 'profile_picture/default.png';
-
-        if (!empty($data['profile_picture'])) {
-            $profilePicturePath = $data['profile_picture']->store('profile_picture', 'public');
-        }
-
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'profile_picture' => $profilePicturePath, // set the profile picture path
         ]);
     }
-
 }

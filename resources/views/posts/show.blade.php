@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-body">
                         @if(Auth::id() !== $post->user_id && (!$post->reactions()->where('user_id', Auth::id())->exists() || !$post->replies()->where('user_id', Auth::id())->exists()))
-                            <h6 style="background-color: black;color: darkred;padding: 5px;width: 45%;">
+                            <h6 style="color: darkred;width: 100%;" class="user-rahk Overlord">
                                 To see this hidden content, you must reply and react.
                             </h6>
                         @else
@@ -49,45 +49,46 @@
                         <p>React to this post:</p>
                         <form action="{{ route('reactions.store', $post) }}" method="POST" class="d-flex">
                             @csrf
-                            <div class="form-group mr-3">
-                                <select class="form-control hhh" name="type" id="type" style="width:50%;margin-right: 50px;">
+                            <div class="form-group mr-3" style="padding-right: 10px;">
+                                <select class="form-control" name="type" id="type">
                                     <option value="like">&#x1F44D;</option>
                                     <option value="love">&#x2764;&#xFE0F;</option>
                                     <option value="laugh">&#x1F602;</option>
                                 </select>
                             </div>
                             @if($post->reactions()->where('user_id', auth()->id())->exists())
-                                <button type="submit" class="btn btn-primary hhh" style="margin-left: -30px;width: 11%;">Unreact</button>
+                                <button type="submit" class="btn btn-primary flex-shrink-0">Unreact</button>
                             @else
-                                <button type="submit" class="btn btn-primary hhh" style="margin-left: -35px;">React</button>
+                                <button type="submit" class="btn btn-primary flex-shrink-0">React</button>
                             @endif
                         </form>
                     </div>
                     <div class="card-body">
-                        <div class="votes">
-                            <form action="{{ route('posts.vote', $post) }}" method="POST">
+                        <div class="votes d-flex align-items-center">
+                            <form action="{{ route('posts.vote', $post) }}" method="POST" class="px-2">
                                 @csrf
-                                <button type="submit" name="vote" value="upvote" class="btn btn-primary">Upvote</button>
-                                <span style="padding: 5px;">{{ $post->upvotes }}</span>
-                                <button type="submit" name="vote" value="downvote" class="btn btn-danger sh">Downvote</button>
-                                <span style="padding: 5px;">{{ $post->downvotes }}</span>
+                                <button type="submit" name="vote" value="upvote" class="btn btn-primary mr-2">Upvote</button>
+                                <span style="padding-left: 5px;">{{ $post->upvotes }}</span>
+                                <hr>
+                                <button type="submit" name="vote" value="downvote" class="btn btn-danger sh mr-2">Downvote</button>
+                                <span style="padding-left: 5px;">{{ $post->downvotes }}</span>
                             </form>
+                            <div class="flex-grow-1">
+                                <span class="user-rank Grandmaster">{{ $post->upvotes + $post->downvotes }} votes</span>
+                            </div>
+                            <div class="" style="font-size: 14px;">
+                                <span class="user-rank Divine">Rating: {{ $post->averageRating }} </span>
+                                <br>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $post->averageRating)
+                                        <i class="fas fa-star text-warning user-rank Master"></i>
+                                    @else
+                                        <i class="far fa-star text-warning"></i>
+                                    @endif
+                                @endfor
+                            </div>
                         </div>
-                        <div class="text-center" style="padding-top: 10px;">
-                            {{ $post->upvotes - $post->downvotes }} votes
-                        </div>
-                        <div class="text-center" style="font-size: 14px;">
-                            <span>Rating: {{ $post->averageRating }} </span>
-                            <br>
-                            @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <= $post->averageRating)
-                                    <x-bi-star-fill class="text-warning" />
-                                @else
-                                    <x-bi-star class="text-warning" />
-                                @endif
-                            @endfor
-                        </div>
-                    <div class="card-header">
+                        <div class="card-header">
                         <hr>
                             {{ $post->replies->count() }} Replies
                         </div>

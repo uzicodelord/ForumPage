@@ -6,6 +6,10 @@ use App\Models\Notification;
 
 class NotificationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
     public function index()
     {
         $user = auth()->user();

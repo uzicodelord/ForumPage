@@ -3,13 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -45,6 +46,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'name_changed_at' => 'datetime',
     ];
 
     public function reactions()
@@ -109,13 +111,9 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
     }
 
-    public function notify($data)
-    {
-        $this->notifications()->create([
-            'message' => $data['message'],
-            'url' => $data['url'],
-        ]);
-    }
+
+
+
 
     public function awards()
     {

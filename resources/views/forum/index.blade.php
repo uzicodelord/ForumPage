@@ -71,8 +71,8 @@
                                             @foreach ($specialCategories as $category)
                                                 <div class="mb-3">
                                                     <div class="card-header d-flex align-items-center">
-                                                        <i class="fa {{ $categoryIcons[$category->name] }} fa-fw mr-2 text-primary"></i>
-                                                        <h3 class="font-shadow Novice" style="padding-left: 10px;">
+                                                        <i class="fa {{ $categoryIcons[$category->name] }} fa-fw mr-2 user-rank Novice" style="font-size: 30px;"></i>
+                                                        <h3 class="font-shadow Novice" style="margin-left: 10px;">
                                                             <a href="{{ route('categories.index', str_replace(' ', '-', strtolower($category->name))) }}">{{ $category->name }}</a>
                                                         </h3>
                                                     </div>
@@ -181,8 +181,7 @@
                 <div class="card">
                     <div class="card-header">About Us</div>
                     <div class="card-body">
-                        <p> <span style="color: red;">UziForum</span> is a forum dedicated to making money on the Internet, various earning schemes, IT issues and much more. This is a forum about making money on the Internet, Also we share knowledge about earning fast,malware modification, hacking, security, programming, cracking, among many other things. Also of tools related to the above. If you have interest and desire to learn do not hesitate to register and start being part of our community, if you are new we will help you in everything we can.
-                        </p>
+                        <p style="font-size: 21px;">Join <span class="user-rank Overlord">UziForum</span> to learn about making money on the Internet, IT issues, and much more. Register now to become part of our community and receive help from experienced members.</p>                            </p>
                     </div>
                 </div>
             </div>
@@ -191,7 +190,7 @@
                 <div class="card">
                     <div class="card-header">A Responsibility</div>
                     <div class="card-body">
-                        <p style="font-size: 21px;"> <span style="color: red;">Administration</span> does not bear any responsibility for publications on this forum. If you think that topics and messages may contain information prohibited for distribution, please immediately inform the Administration.</p>
+                        <p style="font-size: 21px;"> <span class="user-rank Overlord">Administration</span> does not bear any responsibility for publications on this forum. If you think that topics and messages may contain information prohibited for distribution, please report.</p>
                     </div>
                 </div>
             </div>

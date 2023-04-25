@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class RankingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $users = User::orderBy('rank')->get();

@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
+
     public function index()
     {
         $messages = Message::with('user')->orderBy('created_at', 'asc')->get();

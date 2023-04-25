@@ -21,42 +21,70 @@
                                     </h4>
                                     <p class="m-0">{{ $user->email }}</p>
                                 </div>
-                                <div class="d-flex user-stats" style="margin-left: 10px;">
-                                    <p class="user-stat">Points: {{ $user->points }}</p>
-                                    <p class="user-stat">Posts: {{ $user->posts->count() }}</p>
-                                    <p class="user-stat">Replies: {{ $user->replies->count() }}</p>
-                                    <p class="user-stat">Reaction score: {{ $user->reactions->count() }}</p>
+                                <div class="d-flex user-rank" style="margin-left: 10px; padding: 5px; border-radius: 5px;">
+                                    <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Points: {{ $user->points }}
+                                        <i class="fas fa-bolt"></i>
+                                    </p>
+                                    <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Posts: {{ $user->posts->count() }}
+                                        <i class="fa fa-clipboard"></i>
+                                    </p>
+                                    <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Replies: {{ $user->replies->count() }}
+                                        <i class="fa fa-reply" aria-hidden="true"></i>
+                                    </p>
+                                    <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Reaction score: {{ $user->reactions->count() }}
+                                        <i class="fa fa-smile" aria-hidden="true"></i>
+                                    </p>
                                 </div>
                             </div>
+                            <br>
+                            @if(Auth::user()->id == $user->id)
+                                <a href="{{ route('profiles.edit', $user->id) }}">
+                                    <h4 class="btn btn-primary">Edit Profile</h4>
+                                </a>
+                            @endif
+                            <hr>
                             <div class="user-awards">
-                                <h4>Awards:</h4>
                                     @foreach ($user->getAwards() as $award)
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span style="padding-bottom: 10px;" class="fa fa-trophy user-rank {{ $user->getRank() }}"> Awards:</span>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
                                             <span class="user-rank Legend badge badge-{{ $award->color ?? 'primary' }}">{{ $award->name }}</span>
                                             <span class="badge">{{ $award->description }}</span>
                                         </li>
                                     <hr>
                                     @endforeach
                             </div>
-
-                            <h2>Posts</h2>
-                        @if ($posts->count())
-                            @foreach ($posts as $post)
-                                <br>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <a href="{{ route('posts.show',$post->id) }}">{{ $post->title }}</a>
-                                    </div>
-                                    <div class="card-body">
-                                        {{ $post->content }}
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <p>No posts yet.</p>
-                        @endif
+                            <div class="container">
+                                <h2>Posts</h2>
+                                @if (count($posts) > 0)
+                                    @foreach ($posts as $post)
+                                        <div class="card mb-3">
+                                            <div class="card-header d-flex justify-content-between">
+                                                <h3 class="mb-0"><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h3>
+                                                <div class="d-flex align-items-center">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $post->averageRating)
+                                                            <x-bi-star-fill class="text-warning" />
+                                                        @else
+                                                            <x-bi-star class="text-warning" />
+                                                        @endif
+                                                    @endfor
+                                                    <span class="badge badge-pill badge-secondary mr-2">{{ $post->replies->count() }} replies</span>
+                                                    <span class="badge badge-pill badge-secondary">{{ $post->views_count }} views</span>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <small>Posted on {{ $post->created_at }} by <a href="{{ route('profiles.show', $post->user->id) }}">{{ $post->user->name }}</a>
+                                                    <span class="user-rank {{ $post->user->getRank() }}" style="font-size: 15px;">[{{ $post->user->rank }}]</span></small>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    {{ $posts->links('vendor.pagination') }}
+                                @else
+                                    <p>No posts found</p>
+                                @endif
+                            </div>
+                        </div>
                     </div>
+                </div>
             </div>
-        </div>
-    </div>
 @endsection

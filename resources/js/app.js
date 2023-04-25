@@ -37,5 +37,3 @@ app.component('example-component', ExampleComponent);
  */
 
 app.mount('#app');
-
-

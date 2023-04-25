@@ -1,7 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="hero">
+    <div class="hero__title"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+
 <div class="container">
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -67,7 +77,9 @@
                     </form>
                 </div>
             </div>
+            </div>
         </div>
     </div>
 </div>
+
 @endsection

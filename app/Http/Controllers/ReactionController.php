@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ReactionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
     public function store(Request $request, Post $post)
     {
         $validatedData = $request->validate([

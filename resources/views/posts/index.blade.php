@@ -15,10 +15,9 @@
                                     </div>
                                     <div class="card-body">
                                         <small>Written on {{ $post->created_at }} by {{ $post->user->name }}</small>
-                                        <span class="user-rank {{ $user->getRank() }}">[{{ $user->rank }}]</span>
+                                        <span class="user-rank {{ $post->user->getRank() }}">[{{ $post-> user->rank }}]</span>
                                     </div>
                                 </div>
-
                             @endforeach
                             {{ $posts->links() }}
                         @else

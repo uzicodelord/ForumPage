@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
     <title>{{ config('app.name', 'Uzi') }}</title>
 
     <!-- Fonts -->
@@ -38,7 +38,12 @@
 
                     </ul>
                     <!-- Right Side Of Navbar -->
-
+                    @if(Auth::check() && !Auth::user()->hasVerifiedEmail())
+                        <div class="text-center my-2">
+                            <span class="text-danger mr-2">Please verify your email address.</span>
+                            <a href="{{ route('verification.notice') }}" class="btn btn-sm btn-primary">Verify Email</a>
+                        </div>
+                    @endif
                     <ul class="navbar-nav ms-auto">
                         @auth
                             <div>
@@ -68,7 +73,7 @@
                                 <a class="nav-link btn ok" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="dropdown-toggle">
                                         <span style="position: relative;">
-                                            <x-heroicon-s-bell class="uzi" />
+                                        <i style="font-size: 20px;" class="fa fa-bell" aria-hidden="true"></i>
                                         @if (auth()->user()->notifications_count > 0)
                                                 @php
                                                     $unreadCount = auth()->user()->notifications->where('read', false)->count();
@@ -84,7 +89,7 @@
                                     </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <h6 class="dropdown-header">Notifications</h6>
-                                    @foreach (auth()->user()->notifications->take(3) as $notification)
+                                    @foreach (auth()->user()->notifications->take(5) as $notification)
                                         <hr>
                                         <a class="dropdown-item {{ $notification->read ? 'text-muted' : '' }}" href="/posts/{{ $notification->post_id }}">
                                             {!! $notification->message !!}
@@ -265,9 +270,10 @@
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle btn ok" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    <i style="font-size: 20px;" class="fa fa-user-circle" aria-hidden="true"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <h6 class="dropdown-header">{{ Auth::user()->name }}</h6>
                                     <a class="dropdown-item" href="{{ route('profiles.show', Auth::user()->id) }}">
                                         {{ __('Profile') }}
                                     </a>

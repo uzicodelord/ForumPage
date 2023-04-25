@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -31,6 +36,9 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+
+
+
         $post = new Post();
         $post->title = $request->input('title');
         $post->content = $request->input('content');

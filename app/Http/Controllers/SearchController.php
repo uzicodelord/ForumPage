@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
+
     public function index(Request $request)
     {
         $query = $request->input('q');
