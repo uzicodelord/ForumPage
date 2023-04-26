@@ -11,7 +11,7 @@
                     <li class="list-group-item" style="background-color: #1b2838;border: 2px solid #0c8ddb;color: #fff;">
                         {{ $notification->message }}
                         <br>
-                        <a href="{{ route('posts.show', $notification->post_id)}}">View post</a>
+                        <a href="{{ $notification->private_message_id ? route('private_messages.show', $notification->private_message_id) : route('posts.show', $notification->post_id)}}">View {{ $notification->private_message_id ? 'message' : 'post' }}</a>
                         <br>
                         <small>{{ $notification->created_at->diffForHumans() }}</small>
                     </li>

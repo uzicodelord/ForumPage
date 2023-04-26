@@ -144,6 +144,4 @@ class PostController extends Controller
         return view('posts.search', compact('posts', 'query'));
     }
 
-
-
 }

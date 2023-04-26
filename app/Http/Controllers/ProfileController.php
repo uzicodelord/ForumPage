@@ -60,11 +60,7 @@ class ProfileController extends Controller
 
             $profilePicturePath = $request->file('profile_picture')->store('profile_picture', 'public');
 
-            if ($profilePicturePath === 'profile_picture/default.png') {
-                $user->profile_picture = $profilePicturePath;
-            } else {
-                $user->profile_picture = $profilePicturePath;
-            }
+            $user->profile_picture = $profilePicturePath;
 
             $user->save();
         }

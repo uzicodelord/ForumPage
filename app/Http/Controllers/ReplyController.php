@@ -37,9 +37,17 @@ class ReplyController extends Controller
         $user->updateRank();
         $user->save();
 
-        return redirect()->back();
+        return response()->json([
+            'body' => $reply->body,
+            'created_at' => $reply->created_at->diffForHumans(),
+            'user' => [
+                'name' => $reply->user->name,
+                'profile_url' => route('profiles.show', $reply->user->id),
+                'profile_picture_url' => asset('storage/' . $reply->user->profile_picture),
+                'rank' => $reply->user->getRank(),
+            ],
+        ]);
     }
-
 
 
     public function show(Post $post, Reply $reply)

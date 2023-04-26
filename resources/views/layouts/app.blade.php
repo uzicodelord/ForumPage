@@ -22,13 +22,13 @@
 
 </head>
 <body>
-
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -38,12 +38,6 @@
 
                     </ul>
                     <!-- Right Side Of Navbar -->
-                    @if(Auth::check() && !Auth::user()->hasVerifiedEmail())
-                        <div class="text-center my-2">
-                            <span class="text-danger mr-2">Please verify your email address.</span>
-                            <a href="{{ route('verification.notice') }}" class="btn btn-sm btn-primary">Verify Email</a>
-                        </div>
-                    @endif
                     <ul class="navbar-nav ms-auto">
                         @auth
                             <div>
@@ -67,6 +61,11 @@
                         <li class="nav-item">
                             <a class="btn ok" href="{{ route('forum.index') }}">Forum</a>
                         </li>
+                                <li class="nav-item">
+                                    <a class="btn ok" href="{{ route('private_messages.index') }}">
+                                    <i class="fa fa-comments" aria-hidden="true" style="font-size: 20px;"></i>
+                                    </a>
+                                </li>
                         @endauth
                         @auth
                             <div class="dropdown">
@@ -79,7 +78,7 @@
                                                     $unreadCount = auth()->user()->notifications->where('read', false)->count();
                                                 @endphp
                                             @if ($unreadCount > 0)
-                                        <span class="badge badge-danger" style="position: absolute; top: -10px; right: -5px;background: transparent;color: #fff;font-size: 12px;">
+                                        <span class="badge badge-danger" style="position: absolute; top: -10px; right: -10px;background: darkred;color: #fff;font-size: 10px;border-radius: 9999px;">
                                             {{ $unreadCount }}
                                         </span>
                                             @endif
@@ -89,16 +88,23 @@
                                     </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <h6 class="dropdown-header">Notifications</h6>
-                                    @foreach (auth()->user()->notifications->take(5) as $notification)
+                                    @foreach (auth()->user()->notifications->sortByDesc('created_at')->take(5) as $notification)
                                         <hr>
-                                        <a class="dropdown-item {{ $notification->read ? 'text-muted' : '' }}" href="/posts/{{ $notification->post_id }}">
-                                            {!! $notification->message !!}
-                                            <span class="small">- {{ $notification->created_at->diffForHumans() }}</span>
-                                            @if (!$notification->read)
-                                                <a href="/read-notification/{{ $notification->id }}" class="text-muted float-right"><x-feathericon-eye-off style="float:right;width: 15px;height: 15px;" /></a>
-                                            @endif
-                                            <a href="/delete-notification/{{ $notification->id }}" class="text-muted float-right mr-2" ><x-feathericon-trash-2 style="float:right;width: 15px;height: 15px;" /></a>
-                                        </a>
+                                        @if ($notification->private_message_id)
+                                            <a class="dropdown-item {{ $notification->read ? 'text-muted' : '' }}" href="{{ route('private_messages.show', $notification->private_message_id) }}">
+                                                {!! $notification->message !!}
+                                                <span class="small">- {{ $notification->created_at->diffForHumans() }}</span>
+                                            </a>
+                                        @else
+                                            <a class="dropdown-item {{ $notification->read ? 'text-muted' : '' }}" href="{{ route('posts.show', $notification->post_id) }}">
+                                                {!! $notification->message !!}
+                                                <span class="small">- {{ $notification->created_at->diffForHumans() }}</span>
+                                            </a>
+                                        @endif
+                                        @if (!$notification->read)
+                                            <a href="/read-notification/{{ $notification->id }}" class="text-muted float-right"><x-feathericon-eye-off style="float:right;width: 15px;height: 15px;" /></a>
+                                        @endif
+                                        <a href="/delete-notification/{{ $notification->id }}" class="text-muted float-right mr-2" ><x-feathericon-trash-2 style="float:right;width: 15px;height: 15px;" /></a>
                                     @endforeach
                                     <br>
                                     @if (auth()->user()->notifications_count > 0)
@@ -273,7 +279,10 @@
                                     <i style="font-size: 20px;" class="fa fa-user-circle" aria-hidden="true"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <h6 class="dropdown-header">{{ Auth::user()->name }}</h6>
+                                    <h6 class="dropdown-header">
+                                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="{{ Auth::user()->name }}'s Profile Picture" class="rounded-circle mr-2" width="30" height="30">
+                                        {{ Auth::user()->name }}
+                                    </h6>
                                     <a class="dropdown-item" href="{{ route('profiles.show', Auth::user()->id) }}">
                                         {{ __('Profile') }}
                                     </a>

@@ -586,6 +586,22 @@ a:hover {
     font-family: "Montserrat", sans-serif;
 }
 
+.sent {
+    text-align: right;
+}
+
+.sent strong {
+    color: #f44336;
+}
+
+.received {
+    text-align: left;
+}
+
+.received strong {
+    color: #2196f3;
+}
+
 .hero__title {
     color: #fff;
     position: absolute;
@@ -662,4 +678,39 @@ a:hover {
         transform: scale(20) rotate(960deg) translate(-50%, -50%);
         opacity: 0;
     }
+}
+
+/* Style the scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+    background: #1b2838; /* Color of the track */
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background: #0c8ddb; /* Color of the thumb */
+}
+
+/* Style the scrollbar corner */
+::-webkit-scrollbar-corner {
+    background: #f1f1f1; /* Color of the corner */
+}
+.card-height {
+    min-height: 100px;
+    max-height: 650px;
+    overflow-y: auto;
+}
+.card-chat-height {
+    min-height: 100px;
+    max-height: 825px;
+    overflow-y: auto;
+}
+.card-recent-height {
+    min-height: 100px;
+    max-height: 675px;
+    overflow-y: auto;
 }

@@ -1,18 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+    @vite(['resources/js/scroll1.js'])
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
     <script>
         var userId = {{ Auth::id() }};
     </script>
-
+    @if(Auth::check() && !Auth::user()->hasVerifiedEmail())
+        <div class="text-center my-2">
+            <span class="text-danger mr-2">Please verify your email address.</span>
+            &nbsp
+            <a href="{{ route('verification.notice') }}" class="btn btn-sm btn-primary">Verify Email</a>
+        </div>
+    @endif
     <div style="margin: 20px;">
         <div style="text-align: center;">
             <img src="{{ asset('images/banner.gif') }}" alt="Image" style="width: 30%; margin: 0 auto;">
             <img src="{{ asset('images/banner1.gif') }}" alt="Image" style="width: 40%; margin: 0 auto;">
             <img src="{{ asset('images/banner.gif') }}" alt="Image" style="width: 30%; margin: 0 auto;">
         </div>
+
         <div class="image-grid">
             <img src="{{ asset('images/banner-900x120.gif') }}" alt="Image">
             <img src="{{ asset('images/PmxLTLb.gif') }}" alt="Image">
@@ -21,6 +30,7 @@
             <img src="{{ asset('images/qTRXZC4.gif') }}" alt="Image">
             <img src="{{ asset('images/3HgVqHL.gif') }}" alt="Image">
         </div>
+
         <br>
         <br>
         <div>
@@ -43,7 +53,7 @@
             <div class="card">
                 <div class="card-header">Chat</div>
 
-                <div class="card-body">
+                <div class="card-body card-chat-height">
                     <div id="messages" style="padding-bottom: 5px;">
                         @foreach ($messages as $message)
                             <div style="padding-bottom: 5px;">
@@ -59,7 +69,7 @@
                         <input type="text" class="btn btn-primary" id="chat-message" name="message" placeholder="Chat..." style="flex: 1;width: 50%;cursor: text;text-align: left;">
                         <button class="btn btn-primary" type="submit" style="margin-left: 5px;">Send</button>
                     </form>
-                     </div>
+                </div>
                     </div>
                     </div>
                         <div class="col-md-5">
@@ -158,7 +168,7 @@
                         <br>
                         <div class="card">
                             <div class="card-header">Recent Posts</div>
-                            <div class="card-body">
+                            <div class="card-body card-recent-height">
                                 @if (count($posts) > 0)
                                     @foreach ($posts->take(5) as $post)
                                         <div class="card mb-3">

@@ -16,7 +16,7 @@ class ChatController extends Controller
     public function index()
     {
         $messages = Message::with('user')->orderBy('created_at', 'asc')->get();
-        return view('forum.index', compact('messages'));
+        return view('chat.index', compact('messages'));
     }
 
     public function store(Request $request)
@@ -29,6 +29,7 @@ class ChatController extends Controller
 
         return response()->json($message);
     }
+
 
 
 }

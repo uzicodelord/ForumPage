@@ -32,7 +32,10 @@ class NotificationController extends Controller
     public function deleteNotification($id) {
         $notification = Notification::findOrFail($id);
         $notification->delete();
-
+        $user = auth()->user();
+        $user->notifications_count -= 1;
         return redirect()->back();
     }
+
+
 }

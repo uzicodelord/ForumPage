@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container   ">
         <div class="row">
                 <div class="card">
-                        <div class="card-header">
+                        <div class="card-header" style="margin-top: 20px;">
                             <div class="d-flex">
                                 <div style="position: relative;">
                                     <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="{{ $user->name }}'s Profile Picture" class="rounded-circle mr-2" width="50" height="50">
@@ -21,38 +21,40 @@
                                     </h4>
                                     <p class="m-0">{{ $user->email }}</p>
                                 </div>
-                                <div class="d-flex user-rank" style="margin-left: 10px; padding: 5px; border-radius: 5px;">
-                                    <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Points: {{ $user->points }}
-                                        <i class="fas fa-bolt"></i>
-                                    </p>
-                                    <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Posts: {{ $user->posts->count() }}
-                                        <i class="fa fa-clipboard"></i>
-                                    </p>
-                                    <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Replies: {{ $user->replies->count() }}
-                                        <i class="fa fa-reply" aria-hidden="true"></i>
-                                    </p>
-                                    <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Reaction score: {{ $user->reactions->count() }}
-                                        <i class="fa fa-smile" aria-hidden="true"></i>
-                                    </p>
+                                <div style="margin-left: 15px;">
+                                @if(Auth::user()->id == $user->id)
+                                    <a href="{{ route('profiles.edit', $user->id) }}">
+                                        <h4 class="btn btn-primary">Edit Profile</h4>
+                                    </a>
+                                @endif
                                 </div>
                             </div>
                             <br>
-                            @if(Auth::user()->id == $user->id)
-                                <a href="{{ route('profiles.edit', $user->id) }}">
-                                    <h4 class="btn btn-primary">Edit Profile</h4>
-                                </a>
-                            @endif
-                            <hr>
-                            <div class="user-awards">
-                                    @foreach ($user->getAwards() as $award)
-                                    <span style="padding-bottom: 10px;" class="fa fa-trophy user-rank {{ $user->getRank() }}"> Awards:</span>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <span class="user-rank Legend badge badge-{{ $award->color ?? 'primary' }}">{{ $award->name }}</span>
-                                            <span class="badge">{{ $award->description }}</span>
-                                        </li>
-                                    <hr>
-                                    @endforeach
+                            <div class="d-flex user-rank" style="padding-right: 5px; border-radius: 5px;text-align: left;">
+                                <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Points: {{ $user->points }}
+                                    <i class="fas fa-bolt"></i>
+                                </p>
+                                <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Posts: {{ $user->posts->count() }}
+                                    <i class="fa fa-clipboard"></i>
+                                </p>
+                                <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Replies: {{ $user->replies->count() }}
+                                    <i class="fa fa-reply" aria-hidden="true"></i>
+                                </p>
+                                <p class="user-rank {{ $user->getRank() }}" style="margin-right: 10px;">Reaction score: {{ $user->reactions->count() }}
+                                    <i class="fa fa-smile" aria-hidden="true"></i>
+                                </p>
                             </div>
+                                <div class="user-awards">
+                                    @foreach ($user->getAwards() as $award)
+                                        <li class="list-group-item d-flex  align-items-center">
+                                            <i class="fa fa-trophy user-rank {{ $user->getRank() }}"></i>
+                                            <span style="padding-right: 10px;font-size: 14px;" class="user-rank {{ $user->getRank() }}"> Award:</span>
+                                            <span style="font-size: 12px;" class="user-rank {{ $user->getRank() }}">{{ $award->name }}</span>
+                                            <span style="margin-left: 20px;" class="badge">{{ $award->description }}</span>
+                                        </li>
+                                        <hr>
+                                    @endforeach
+                                </div>
                             <div class="container">
                                 <h2>Posts</h2>
                                 @if (count($posts) > 0)

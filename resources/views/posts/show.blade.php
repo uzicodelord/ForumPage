@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @vite([ 'resources/js/reply.js'])
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -65,7 +66,7 @@
                     </div>
                     <div class="card-body">
                         <div class="votes d-flex align-items-center">
-                            <form action="{{ route('posts.vote', $post) }}" method="POST" class="px-2">
+                            <form id="vote-form" action="{{ route('posts.vote', $post) }}" method="POST" class="px-2">
                                 @csrf
                                 <button type="submit" name="vote" value="upvote" class="btn btn-primary mr-2">Upvote</button>
                                 <span style="padding-left: 5px;">{{ $post->upvotes }}</span>
@@ -93,26 +94,36 @@
                             {{ $post->replies->count() }} Replies
                         </div>
                         <div class="card-body">
+                            <div id="repliesContainer">
                             @foreach ($post->replies as $reply)
                                 <div class="mb-3">
-                                    <div class="font-weight-bold"><b style="color: #fff">{{ $reply->user->name }} <span class="user-rank {{ $reply->user->getRank() }}">[{{ $reply->user->getRank() }}]</span></b></div>
+                                    <a href="{{ route('profiles.show', $reply->user->id) }}">
+                                        <div class="font-weight-bold">
+                                            <img src="{{ asset('storage/' . $reply->user->profile_picture) }}" alt="{{ $reply->user->name }}'s Profile Picture" class="rounded-circle mr-2" width="40" height="40">
+                                            <b style="color: #fff">
+                                            {{ $reply->user->name }}
+                                                <span class="user-rank {{ $reply->user->getRank() }}">
+                                                    [{{ $reply->user->getRank() }}]:
+                                                </span>
+                                            </b>
+                                        </div>
+                                    </a>
                                     <div>{{ $reply->body }}
                                         <span class="text-muted" style="float:right;">{{ $reply->created_at->diffForHumans() }}</span>
                                     </div>
                                 </div>
                             @endforeach
-
-                            <form method="POST" action="{{ route('replies.store', $post) }}">
+                            </div>
+                            <form id="replyForm" method="POST" action="{{ route('replies.store', $post) }}">
                                 @csrf
-
                                 <div class="form-group">
                                     <label for="replyBody">Leave a reply</label>
                                     <textarea name="body" id="replyBody" class="form-control" rows="5"></textarea>
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="button" id="submitReply" class="btn btn-primary">Submit</button>
                             </form>
-                                <div class="pagination-wrapper" style="background-color: #090909; color: darkred; text-align: center;">
+                            <div class="pagination-wrapper" style="background-color: #090909; color: darkred; text-align: center;">
                                     {{ $replies->links('vendor.pagination') }}
                                 </div>
                         </div>

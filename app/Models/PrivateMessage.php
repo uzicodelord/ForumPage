@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Message extends Model
+class PrivateMessage extends Model
 {
     use HasFactory;
 
+    protected $table = 'privatemessages';
     protected $fillable = [
-        'user_id',
-        'message',
+        'sender_id', 'recipient_id', 'content'
     ];
 
-    public function user()
+    public function sender()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
     public function recipient()

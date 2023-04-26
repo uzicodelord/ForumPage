@@ -106,15 +106,10 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->save();
     }
 
-    public function notifications(): HasMany
+    public function notifications()
     {
-        return $this->hasMany(Notification::class);
+        return $this->hasMany(Notification::class)->orderByDesc('created_at');
     }
-
-
-
-
-
     public function awards()
     {
         return $this->belongsToMany(Award::class)->withTimestamps();
@@ -141,9 +136,6 @@ class User extends Authenticatable implements MustVerifyEmail
             $awards[] = Award::where('name', 'Newbie Poster')->first();
         }
 
-
-
-        // Check if the user has made at least 10 replies
         if ($this->replies()->count() >= 100) {
             $awards[] = Award::where('name', 'Good Samaritan')->first();
         } elseif ($this->replies()->count() >= 80) {
@@ -160,8 +152,6 @@ class User extends Authenticatable implements MustVerifyEmail
             $awards[] = Award::where('name', 'Newbie Responder')->first();
         }
 
-
-        // Check if the user has received at least 25 reactions
         if ($this->reactions()->count() >= 1000) {
             $awards[] = Award::where('name', 'King of Reactions')->first();
         } elseif ($this->reactions()->count() >= 500) {
@@ -179,8 +169,6 @@ class User extends Authenticatable implements MustVerifyEmail
         } elseif ($this->reactions()->count() >= 5) {
             $awards[] = Award::where('name', 'React Novice')->first();
         }
-
-        // Add other award conditions here...
 
         return $awards;
     }

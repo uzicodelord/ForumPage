@@ -7,6 +7,7 @@ use App\Http\Controllers\ForumController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PrivateMessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\ReplyController;
@@ -27,7 +28,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
     Route::get('/', [ForumController::class, 'index'])->name('forum.index');
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/categories/{category:name}', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
@@ -49,6 +49,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
     Route::post('/chat', [ChatController::class, 'store'])->name('chat.store');
     Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+    Route::get('/private_messages', [PrivateMessageController::class, 'index'])->name('private_messages.index');
+    Route::get('/private_messages/{user}', [PrivateMessageController::class, 'show'])->name('private_messages.show');
+    Route::post('/private_messages/{user}', [PrivateMessageController::class, 'store'])->name('private_messages.store');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
