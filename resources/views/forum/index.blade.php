@@ -15,7 +15,7 @@
             <a href="{{ route('verification.notice') }}" class="btn btn-sm btn-primary">Verify Email</a>
         </div>
     @endif
-    <div style="margin: 20px;">
+    <div style="margin: 20px;" class="main">
         <div style="text-align: center;">
             <img src="{{ asset('images/banner.gif') }}" alt="Image" style="width: 30%; margin: 0 auto;">
             <img src="{{ asset('images/banner1.gif') }}" alt="Image" style="width: 40%; margin: 0 auto;">
@@ -37,13 +37,26 @@
             @if($upvotedpost)
                 <h2>Top Voted Post</h2>
                 <div class="card mb-3">
-                    <div class="card-header">
-                        <h3><a href="{{ route('posts.show',$upvotedpost->id) }}">{{ $upvotedpost->title }}</a></h3>
+                    <div class="card-header d-flex justify-content-between">
+                        <h3 class="mb-0"><a href="{{ route('posts.show', $upvotedpost->id) }}">{{ $upvotedpost->title }}</a></h3>
+                        <div class="d-flex align-items-center" >
+                            <div style="margin-right: 15px;">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $upvotedpost->averageRating)
+                                    <i class="fas fa-star text-warning user-rank Master"></i>
+                                @else
+                                    <i class="far fa-star text-warning"></i>
+                                @endif
+                            @endfor
+                            </div>
+                                <span class="badge badge-pill badge-secondary mr-2">{{ $upvotedpost->upvotes + $upvotedpost->downvotes }} votes</span>
+                                <span class="badge badge-pill badge-secondary mr-2">{{ $upvotedpost->replies->count() }} replies</span>
+                            <span class="badge badge-pill badge-secondary">{{ $upvotedpost->views_count }} views</span>
+                        </div>
                     </div>
                     <div class="card-body">
                         <small>Posted on {{ $upvotedpost->created_at }} by <a href="{{ route('profiles.show', $upvotedpost->user->id) }}">{{ $upvotedpost->user->name }}</a>
-                            <span class="user-rank {{ $upvotedpost->user->getRank() }}">&nbsp[{{ $upvotedpost->user->rank }}]</span>
-                        </small>
+                            <span class="user-rank {{ $upvotedpost->user->getRank() }}" style="font-size: 15px;">&nbsp[{{ $upvotedpost->user->rank }}]</span></small>
                     </div>
                 </div>
             @endif
@@ -172,13 +185,26 @@
                                 @if (count($posts) > 0)
                                     @foreach ($posts->take(5) as $post)
                                         <div class="card mb-3">
-                                            <div class="card-header">
-                                                <h3><a href="{{ route('posts.show',$post->id) }}">{{ $post->title }}</a></h3>
+                                            <div class="card-header d-flex justify-content-between">
+                                                <h3 class="mb-0"><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h3>
+                                                <div class="d-flex align-items-center">
+                                                    <div style="margin-right: 15px;">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $post->averageRating)
+                                                            <i class="fas fa-star text-warning user-rank Master"></i>
+                                                        @else
+                                                            <i class="far fa-star text-warning"></i>
+                                                        @endif
+                                                    @endfor
+                                                    </div>
+                                                        <span class="badge badge-pill badge-secondary mr-2">{{ $post->upvotes + $post->downvotes }} votes</span>
+                                                        <span class="badge badge-pill badge-secondary mr-2">{{ $post->replies->count() }} replies</span>
+                                                    <span class="badge badge-pill badge-secondary">{{ $post->views_count }} views</span>
+                                                </div>
                                             </div>
                                             <div class="card-body">
                                                 <small>Posted on {{ $post->created_at }} by <a href="{{ route('profiles.show', $post->user->id) }}">{{ $post->user->name }}</a>
-                                                    <span class="user-rank {{ $post->user->getRank() }}">&nbsp[{{ $post->user->rank }}]</span>
-                                                </small>
+                                                    <span class="user-rank {{ $post->user->getRank() }}" style="font-size: 15px;">&nbsp[{{ $post->user->rank }}]</span></small>
                                             </div>
                                         </div>
                                     @endforeach

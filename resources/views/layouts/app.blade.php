@@ -14,7 +14,9 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;1,100&display=swap" rel="stylesheet">
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/chat.js'])
@@ -41,13 +43,9 @@
                     <ul class="navbar-nav ms-auto">
                         @auth
                             <div>
-                                <form action="{{ route('search.index') }}" method="GET" id="search-form">
-                                    <div class="form-group">
-                                        <input type="text" name="q" class="form-control" id="search-input" placeholder="Search">
-                                    </div>
-                                </form>
+                                <input type="text" class="form-control" name="q" id="search" placeholder="Search...">
+
                                 <div id="search-results">
-                                    <ul class="list-group"></ul>
                                 </div>
                             </div>
                         @if(Auth::user()->role == 'admin')
@@ -332,38 +330,29 @@
         });
 
         $(document).ready(function() {
-            $('#search-input').on('keyup', function() {
+            $('#search').on('keyup', function() {
                 var query = $(this).val();
-                if (query !== '') {
-                    $.ajax({
-                        url: "{{ route('search.index') }}",
-                        type: "GET",
-                        data: { q: query },
-                        success: function(response) {
-                            var results = [];
-                            $(response).find('li').each(function() {
-                                var postLink = $(this).find('a');
-                                var post = {
-                                    id: postLink.attr('href').split('/').pop(),
-                                    title: postLink.text()
-                                };
-                                results.push(post);
-                            });
-                            var output = '';
-                            $.each(results, function(index, post) {
-                                output += '<li style="list-style-type: none;font-size: 18px;text-align: left;">' +
-                                    '<a style="color: #fff;" href="/posts/' + post.id + '">' + post.title + '</a></li>'
-                                ;
-                            });
-                            $('#search-results').html('<ul>' + output + '</ul>');
-                        }
-                    });
-                } else {
-                    $('#search-results ul').empty();
-                }
+                $.ajax({
+                    url: "{{ route('search.index') }}",
+                    method: "GET",
+                    data: {q: query},
+                    dataType: 'json',
+                    success: function(data) {
+                        var html = '';
+                        $.each(data.posts, function(i, post) {
+                            html += '<a href="/posts/' + post.id + '">' + post.title + '</a><br>';
+                        });
+                        $.each(data.categories, function(i, category) {
+                            html += '<a href="/categories/' + category.name + '">' + category.name + '</a><br>';
+                        });
+                        $.each(data.users, function(i, user) {
+                            html += '<a href="/profiles/' + user.id + '">' + user.name + '</a><br>';
+                        });
+                        $('#search-results').html(html);
+                    }
+                });
             });
         });
-
 
     </script>
 </body>

@@ -27,7 +27,7 @@
                             {{ $post->content }}
                         @endif
                     </div>
-                @if($post->reactions()->count() > 0)
+                    @if($post->reactions()->count() > 0)
                         <div class="reactions" style="margin: 10px;">
                             @php
                                 $reactions = $post->reactions->groupBy('type')->map(function($reaction) {
@@ -35,13 +35,13 @@
                                 });
                             @endphp
                             @if($reactions->has('like'))
-                                <span class="reaction-icon">&#x1F44D; {{ $reactions['like'] }}</span>
+                                <span class="reaction-icon"><i class="fa fa-thumbs-up user-rank Novice"></i> {{ $reactions['like'] }}</span>
                             @endif
                             @if($reactions->has('love'))
-                                <span class="reaction-icon">&#x2764;&#xFE0F; {{ $reactions['love'] }}</span>
+                                <span class="reaction-icon"><i class="fa fa-heart user-rank Overlord"></i> {{ $reactions['love'] }}</span>
                             @endif
                             @if($reactions->has('laugh'))
-                                <span class="reaction-icon">&#x1F602; {{ $reactions['laugh'] }}</span>
+                                <span class="reaction-icon"><i class="fa fa-laugh user-rank Master"></i> {{ $reactions['laugh'] }}</span>
                             @endif
                         </div>
                     @endif
@@ -64,7 +64,7 @@
                             @endif
                         </form>
                     </div>
-                    <div class="card-body">
+                        <div class="card-body">
                         <div class="votes d-flex align-items-center">
                             <form id="vote-form" action="{{ route('posts.vote', $post) }}" method="POST" class="px-2">
                                 @csrf
@@ -75,7 +75,7 @@
                                 <span style="padding-left: 5px;">{{ $post->downvotes }}</span>
                             </form>
                             <div class="flex-grow-1">
-                                <span class="user-rank Grandmaster">{{ $post->upvotes + $post->downvotes }} votes</span>
+                                <span class="user-rank Divine">{{ $post->upvotes + $post->downvotes }} votes</span>
                             </div>
                             <div class="" style="font-size: 14px;">
                                 <span class="user-rank Divine">Rating: {{ $post->averageRating }} </span>
@@ -90,8 +90,8 @@
                             </div>
                         </div>
                         <div class="card-header">
-                        <hr>
-                            {{ $post->replies->count() }} Replies
+                            <hr>
+                            <span id="replyCount">{{ $post->replies->count() }} Replies</span>
                         </div>
                         <div class="card-body">
                             <div id="repliesContainer">
@@ -108,8 +108,9 @@
                                             </b>
                                         </div>
                                     </a>
-                                    <div>{{ $reply->body }}
-                                        <span class="text-muted" style="float:right;">{{ $reply->created_at->diffForHumans() }}</span>
+                                    <div class="card-footer" style="margin-top: 10px;">
+                                        {{ $reply->body }}
+                                        <span class="text-muted" style="float: right;font-size: 14px;">{{ $reply->created_at->diffForHumans() }}</span>
                                     </div>
                                 </div>
                             @endforeach
@@ -118,10 +119,9 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="replyBody">Leave a reply</label>
-                                    <textarea name="body" id="replyBody" class="form-control" rows="5"></textarea>
+                                    <textarea name="body" id="replyBody" class="form-control" style="resize:none;" rows="3"></textarea>
                                 </div>
-                                <br>
-                                <button type="button" id="submitReply" class="btn btn-primary">Submit</button>
+                                <button type="button" id="submitReply" class="btn btn-primary" style="margin-top: 5px;">Submit</button>
                             </form>
                             <div class="pagination-wrapper" style="background-color: #090909; color: darkred; text-align: center;">
                                     {{ $replies->links('vendor.pagination') }}
@@ -147,7 +147,6 @@
             @endif
         </div>
     </div>
-    <!-- Edit Post Modal -->
 
     <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
         <div class="modal-dialog">

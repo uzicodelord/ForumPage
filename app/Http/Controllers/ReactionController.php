@@ -56,9 +56,6 @@ class ReactionController extends Controller
     }
 
 
-
-
-
     public function destroy(Post $post, Reaction $reaction)
     {
         $this->authorize('delete', $reaction);

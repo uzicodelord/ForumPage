@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -24,7 +25,15 @@ class SearchController extends Controller
         foreach ($categories as $category) {
             $category->name = ucwords(str_replace('-', ' ', $category->name));
         }
-        return view('search.index', compact('posts', 'query', 'categories'));
+        $users = User::where('name', 'LIKE', "%$query%")->get();
+
+        $results = [
+            'posts' => $posts,
+            'categories' => $categories,
+            'users' => $users,
+        ];
+
+        return response()->json($results);
     }
 
 }

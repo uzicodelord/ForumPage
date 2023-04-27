@@ -13,20 +13,23 @@
                                     <div class="card-header d-flex justify-content-between">
                                         <h3 class="mb-0"><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h3>
                                         <div class="d-flex align-items-center">
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i <= $post->averageRating)
-                                                    <x-bi-star-fill class="text-warning" />
-                                                @else
-                                                    <x-bi-star class="text-warning" />
-                                                @endif
-                                            @endfor
+                                            <div style="margin-right: 15px;">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $post->averageRating)
+                                                        <i class="fas fa-star text-warning user-rank Master"></i>
+                                                    @else
+                                                        <i class="far fa-star text-warning"></i>
+                                                    @endif
+                                                @endfor
+                                            </div>
+                                            <span class="badge badge-pill badge-secondary mr-2">{{ $post->upvotes + $post->downvotes }} votes</span>
                                             <span class="badge badge-pill badge-secondary mr-2">{{ $post->replies->count() }} replies</span>
                                             <span class="badge badge-pill badge-secondary">{{ $post->views_count }} views</span>
                                         </div>
                                     </div>
                                     <div class="card-body">
                                         <small>Posted on {{ $post->created_at }} by <a href="{{ route('profiles.show', $post->user->id) }}">{{ $post->user->name }}</a>
-                                            <span class="user-rank {{ $post->user->getRank() }}" style="font-size: 15px;">[{{ $post->user->rank }}]</span></small>
+                                            <span class="user-rank {{ $post->user->getRank() }}" style="font-size: 15px;">&nbsp[{{ $post->user->rank }}]</span></small>
                                     </div>
                                 </div>
                             @endforeach

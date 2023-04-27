@@ -1,14 +1,17 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;1,100&display=swap');
 // Variables
 $primary-color: #1DA1F2;
 $secondary-color: #657786;
-$background-color: #14171A;
+$background-color: red;
 $text-color: #FFFFFF;
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
 
 .navbar-brand {
     color: $primary-color;
@@ -88,6 +91,8 @@ $text-color: #FFFFFF;
     color: $primary-color;
 }
 
+
+
 .card-header {
     background-color: $background-color;
     color: $primary-color;
@@ -143,6 +148,8 @@ $text-color: #FFFFFF;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(29, 161, 242, 0.5);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(29, 161, 242, 0.5);
     transition: 0.3s ease-in;
+    background-color: #1b2838;
+    color: #fff;
 }
 
 .form-check-input {
@@ -344,118 +351,6 @@ a:hover {
     transform: scale(1);
 }
 
-.rank-ultimate-overlord {
-    color: #F5F5F5;
-    text-shadow: 0 0 5px #FFA500, 0 0 10px #FFA500, 0 0 20px #FFA500;
-    animation: glowing-orange 1s ease-in-out infinite;
-}
-
-.rank-supreme-commander {
-    color: #F5F5F5;
-    text-shadow: 0 0 5px #8B008B, 0 0 10px #8B008B, 0 0 20px #8B008B;
-    animation: glowing-purple 1s ease-in-out infinite;
-}
-
-.rank-generalissimo {
-    color: #F5F5F5;
-    text-shadow: 0 0 5px #1E90FF, 0 0 10px #1E90FF, 0 0 20px #1E90FF;
-    animation: glowing-blue 1s ease-in-out infinite;
-}
-
-.rank-grandmaster {
-    color: #F5F5F5;
-    text-shadow: 0 0 5px #228B22, 0 0 10px #228B22, 0 0 20px #228B22;
-    animation: glowing-green 1s ease-in-out infinite;
-}
-
-.rank-master {
-    color: #F5F5F5;
-    text-shadow: 0 0 5px #6A5ACD, 0 0 10px #6A5ACD;
-    animation: glowing-blueviolet 1s ease-in-out infinite;
-}
-
-.rank-veteran {
-    color: #F5F5F5;
-    text-shadow: 0 0 5px #008B8B, 0 0 10px #008B8B;
-    animation: glowing-darkcyan 1s ease-in-out infinite;
-}
-
-.rank-pro {
-    color: #F5F5F5;
-    text-shadow: 0 0 5px #696969;
-    animation: glowing-dimgrey 1s ease-in-out infinite;
-}
-
-.rank-expert {
-    color: #F5F5F5;
-    text-shadow: 0 0 5px #DC143C;
-    animation: glowing-crimson 1s ease-in-out infinite;
-}
-
-.rank-novice {
-    color: #F5F5F5;
-    text-shadow: 0 0 5px #F5DEB3;
-    animation: glowing-wheat 1s ease-in-out infinite;
-}
-
-.rank-peasant {
-    color: inherit;
-}
-
-/* keyframe animations for the glowing effect */
-@keyframes glowing-orange {
-    0% {
-        text-shadow: 0 0 5px #FFA500, 0 0 10px #FFA500, 0 0 20px #FFA500;
-    }
-}
-
-@keyframes glowing-purple {
-    0% {
-        text-shadow: 0 0 5px #8B008B, 0 0 10px #8B008B, 0 0 20px #8B008B;
-    }
-}
-
-@keyframes glowing-blue {
-    0% {
-        text-shadow: 0 0 5px #1E90FF, 0 0 10px #1E90FF, 0 0 20px #1E90FF;
-    }
-}
-
-@keyframes glowing-green {
-    0% {
-        text-shadow: 0 0 5px #228B22, 0 0 10px #228B22, 0 0 20px #228B22;
-    }
-}
-
-@keyframes glowing-blueviolet {
-    0% {
-        text-shadow: 0 0 5px #6A5ACD, 0 0 10px #6A5ACD, 0 0 20px #6A5ACD;
-    }
-}
-
-@keyframes glowing-darkcyan {
-    0% {
-        text-shadow: 0 0 5px #008B8B, 0 0 10px #008B8B;
-    }
-}
-
-@keyframes glowing-dimgrey {
-    0% {
-        text-shadow: 0 0 5px #696969;
-    }
-}
-
-@keyframes glowing-crimson {
-    0% {
-        text-shadow: 0 0 5px #DC143C;
-    }
-}
-
-@keyframes glowing-wheat {
-    0% {
-        text-shadow: 0 0 5px #F5DEB3;
-    }
-}
 
 .user-stats {
     padding: 5px;
@@ -478,78 +373,145 @@ a:hover {
 }
 
 .Peasant {
-    color: #FFB347;
-    text-shadow: 0px 0px 20px #FFB347;
+    color: #c7c7c7;
+    text-shadow: 0px 0px 20px #c7c7c7;
 }
 
 .Trainee {
-    color: #C23B22;
-    text-shadow: 0px 0px 20px #C23B22;
+    color: #f0a958;
+    text-shadow: 0px 0px 20px #f0a958;
 }
 
 .Novice {
-    color: #00BFFF;
-    text-shadow: 0px 0px 20px #00BFFF;
+    color: #38b8ff;
+    text-shadow: 0px 0px 20px #38b8ff;
 }
 
 .Apprentice {
-    color: #9370DB;
-    text-shadow: 0px 0px 20px #9370DB;
+    color: #b77dff;
+    text-shadow: 0px 0px 20px #b77dff;
 }
 
-.Journeyman  {
-    color: #C0C0C0;
-    text-shadow: 0px 0px 20px #C0C0C0;
+.Journeyman {
+    color: #0052c9;
+    text-shadow: 0px 0px 20px #0052c9;
 }
 
 .Veteran {
-    color: #800000;
-    text-shadow: 0px 0px 20px #800000;
+    color: #ffdc5c;
+    text-shadow: 0px 0px 20px #ffdc5c;
 }
 
 .Elite {
-    color: #DB7F8E;
-    text-shadow: 0px 0px 20px #DB7F8E;
+    color: #e85c6e;
+    text-shadow: 0px 0px 20px #e85c6e;
 }
 
 .Master {
-    color: #FFD700;
-    text-shadow: 0px 0px 20px #FFD700;
+    color: #ffc100;
+    text-shadow: 0px 0px 20px #ffc100;
 }
-
 .Grandmaster {
-    color: #FF69B4;
-    text-shadow: 0px 0px 20px #FF69B4;
+    color: #e832a3;
+    text-shadow: 0px 0px 20px #e832a3;
 }
 
 .Legend {
-    color: #9400D3;
-    text-shadow: 0px 0px 20px #9400D3;
+    color: #9a3aff;
+    text-shadow: 0px 0px 20px #9a3aff;
 }
 
 .Hero {
-    color: #223e85;
-    text-shadow: 0px 0px 20px #183062;
+    color: #193d87;
+    text-shadow: 0px 0px 20px #193d87;
+}
+
+.Peasant {
+    color: #c7c7c7;
+    text-shadow: 0px 0px 20px #c7c7c7;
+}
+
+.Trainee {
+    color: #f0a958;
+    text-shadow: 0px 0px 20px #f0a958;
+}
+
+.Novice {
+    color: #38b8ff;
+    text-shadow: 0px 0px 20px #38b8ff;
+}
+
+.Apprentice {
+    color: #b77dff;
+    text-shadow: 0px 0px 20px #b77dff;
+}
+
+.Journeyman {
+    color: #0052c9;
+    text-shadow: 0px 0px 20px #0052c9;
+}
+
+.Veteran {
+    color: #ffdc5c;
+    text-shadow: 0px 0px 20px #ffdc5c;
+}
+
+.Elite {
+    color: #e85c6e;
+    text-shadow: 0px 0px 20px #e85c6e;
+}
+
+.Master {
+    color: #ffc100;
+    text-shadow: 0px 0px 20px #ffc100;
+}
+
+.Grandmaster {
+    color: #e832a3;
+    text-shadow: 0px 0px 20px #e832a3;
+}
+
+.Legend {
+    color: #9a3aff;
+    text-shadow: 0px 0px 20px #9a3aff;
+}
+
+.Hero {
+    color: #193d87;
+    text-shadow: 0px 0px 20px #193d87;
 }
 
 .Divine {
-    color: #fff;
-    text-shadow: 0px 0px 20px #9d4616;
+    color: #ffc480;
+    text-shadow: 0px 0px 20px #ff8140;
 }
 
 .Immortal {
-    color: #bb1577;
-    text-shadow: 0px 0px 20px #dedcdc;
+    color: #f458b6;
+    text-shadow: 0px 0px 20px #f458b6;
+    animation: glow 1s ease-in-out infinite alternate;
 }
 
 .Overlord {
-    color: #6b2424;
-    text-shadow: 0px 0px 20px rgba(255, 0, 0, 0.7);
+    color: #8e2b2b;
+    text-shadow: 0px 0px 20px rgba(255, 0, 0, 0.8);
+    animation: glow 1s ease-in-out infinite alternate;
+
 }
 
 .Supreme {
-    color: #000000;
-    text-shadow: 0px 0px 20px #9400D3;
+    color: #c94b1d;
+    text-shadow: 0px 0px 20px rgb(201, 75, 29);
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0px 0px 20px rgba(201, 75, 29, 0.5);
+    }
+    to {
+        text-shadow: 0px 0px 20px rgba(201, 75, 29, 1);
+    }
 }
 
 .rounded-circle {
@@ -713,4 +675,9 @@ a:hover {
     min-height: 100px;
     max-height: 675px;
     overflow-y: auto;
+}
+
+.reaction-icon {
+    padding-left: 10px;
+    padding-right: 10px;
 }
